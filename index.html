@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Репетитор Кая" />
+  <meta name="description" content="Персональный ИИ-репетитор Кая: математика 5 класса и русский язык по учебнику Ладыженской, часть 1." />
+  <title>Мой ИИ-репетитор — Кай</title>
+  <style>
+:root{
+  --bg:#0b1220;--panel:#111a2e;--panel2:#18233c;--text:#f8fafc;--muted:#a9b4c8;
+  --accent:#7c9cff;--accent2:#68d6c7;--danger:#ff8f8f;--ok:#8be2a9;--warn:#f5cc68;--line:#2a3857;
+  --shadow:0 18px 60px rgba(0,0,0,.25);--radius:24px
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 20% 0%,#17264a 0,#0b1220 38%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}.shell{max-width:1180px;margin:0 auto;padding:20px 18px 80px}.startup-card{max-width:620px;margin:12vh auto 0}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{font-weight:850;letter-spacing:-.04em;font-size:22px;color:white}.brand span{color:var(--accent2)}.brand-button{border:0;background:transparent;padding:0;cursor:pointer;text-align:left}.role-switch{display:flex;padding:4px;border:1px solid var(--line);border-radius:999px;background:rgba(17,26,46,.75);backdrop-filter:blur(10px)}.role-switch button{border:0;background:transparent;color:var(--muted);padding:9px 14px;border-radius:999px;cursor:pointer}.role-switch button.active{background:var(--panel2);color:white}
+.card{background:linear-gradient(180deg,rgba(24,35,60,.97),rgba(17,26,46,.97));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:18px;margin-bottom:18px}.hero h1{font-size:clamp(34px,5vw,58px);line-height:.98;letter-spacing:-.055em;margin:10px 0 14px}.parent-hero h1{font-size:clamp(30px,4vw,48px)}.sub{color:var(--muted);font-size:16px;line-height:1.55;margin:0}.sub.compact{margin-top:6px}.pill{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(124,156,255,.13);border:1px solid rgba(124,156,255,.28);color:#dce5ff;font-size:13px;font-weight:750}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);font-weight:800}.focus-title{font-size:24px;font-weight:850;letter-spacing:-.03em;margin:8px 0}.chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.tag{display:inline-block;padding:5px 9px;border-radius:999px;background:#0e172a;border:1px solid var(--line);color:#cbd5e1;font-size:12px}
+.primary,.secondary,.ghost,.back,.navcard,.choice{touch-action:manipulation}.primary{border:0;background:linear-gradient(135deg,var(--accent),#a885ff);color:white;font-weight:800;padding:14px 18px;border-radius:16px;cursor:pointer;box-shadow:0 10px 28px rgba(124,156,255,.25)}.primary.big{padding:16px 22px}.secondary{border:1px solid var(--line);background:#17233c;color:white;font-weight:750;padding:13px 16px;border-radius:16px;cursor:pointer}.ghost{border:0;background:transparent;color:var(--muted);cursor:pointer;padding:10px}.back{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:#101a2f;color:white;cursor:pointer;font-size:22px}.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.danger-text{color:var(--danger)}
+.navcards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:18px 0}.navcard{background:rgba(24,35,60,.78);border:1px solid var(--line);border-radius:18px;padding:17px;color:white;text-align:left;cursor:pointer;min-height:132px;transition:transform .15s ease,border-color .15s ease}.navcard:hover{transform:translateY(-2px);border-color:#455b8d}.navcard b{display:block;margin:8px 0 6px}.navcard small{color:var(--muted);line-height:1.4}.navicon{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:10px;background:rgba(124,156,255,.13);color:#dce5ff;font-weight:900}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.stack{display:flex;flex-direction:column;gap:10px}.topic{padding:18px;border-radius:20px;background:rgba(11,18,32,.45);border:1px solid var(--line)}.topic-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.topic h3{margin:0 0 4px;font-size:17px}.bar{height:8px;background:#0d1528;border-radius:999px;overflow:hidden;margin-top:12px}.bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:999px}.mission{border:1px solid rgba(168,133,255,.28);background:linear-gradient(135deg,rgba(124,156,255,.08),rgba(168,133,255,.08));border-radius:20px;padding:18px;margin-top:14px}
+.screen-title{display:flex;align-items:center;gap:12px;margin:4px 0 18px}.screen-title h2{margin:0;font-size:28px;letter-spacing:-.03em}.lesson-wrap{max-width:760px;margin:0 auto}.lesson-progress{display:flex;gap:6px;margin:14px 0 22px}.lesson-progress span{height:7px;flex:1;background:#1c2945;border-radius:999px}.lesson-progress span.done{background:var(--accent2)}.lesson-progress span.current{background:var(--accent)}.lesson-card{padding:26px}.question{font-size:clamp(24px,4vw,31px);font-weight:800;line-height:1.3;margin:18px 0 20px;white-space:pre-wrap}.answer-label,.field-label{display:block;font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}.answer,.select{width:100%;padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:#0d1629;color:white;outline:none}.select{padding:13px 14px}.answer:focus,.select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,156,255,.12)}.feedback{margin-top:14px;padding:14px 16px;border-radius:16px;line-height:1.5}.feedback.ok{background:rgba(139,226,169,.12);border:1px solid rgba(139,226,169,.3)}.feedback.bad{background:rgba(255,143,143,.1);border:1px solid rgba(255,143,143,.28)}.hintbox{margin-top:12px;padding:14px 16px;border-left:3px solid var(--accent);background:rgba(124,156,255,.08);border-radius:12px;color:#dfe6f7}.hintbox b{display:block;margin-bottom:5px}.footer-note{margin-top:20px;color:var(--muted);font-size:12px;line-height:1.5}.site-footer{margin-top:34px;text-align:center;color:#71809d;font-size:11px}.tiny{font-size:12px;color:var(--muted)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.kpi{background:rgba(11,18,32,.45);border:1px solid var(--line);border-radius:18px;padding:16px}.metric{font-size:34px;font-weight:850;letter-spacing:-.04em}.metric-label{color:var(--muted);font-size:13px;margin-top:3px}.result-card h1{font-size:54px;letter-spacing:-.05em;margin:16px 0 4px}.section-title{font-size:13px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);margin:0 0 12px;font-weight:800}.section-gap{margin-top:16px}.recommend{padding:15px;border:1px solid rgba(104,214,199,.25);background:rgba(104,214,199,.08);border-radius:16px;line-height:1.5;margin-top:14px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:520px}.table td,.table th{padding:12px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.table th{color:var(--muted);font-weight:700}.curriculum{max-height:500px;overflow:auto;padding-right:6px}.curriculum-row{display:grid;grid-template-columns:58px 1fr 78px;gap:12px;align-items:center;padding:10px 8px;border-bottom:1px solid rgba(42,56,87,.7)}.curriculum-row.current{background:rgba(124,156,255,.08);border-radius:12px}.statusdot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;background:#65718a}.statusdot.good{background:var(--ok)}.statusdot.mid{background:var(--warn)}
+.upload{display:flex;min-height:180px;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed #45577f;border-radius:18px;padding:18px;text-align:center;background:rgba(13,22,41,.55);cursor:pointer}.upload-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:16px;background:rgba(124,156,255,.12);font-size:28px}.hidden-file{position:absolute;left:-9999px}.preview{margin-top:12px}.preview-image{max-width:100%;max-height:440px;border-radius:16px;border:1px solid var(--line);display:block;margin:auto}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.choice{border:1px solid var(--line);background:#101a2f;color:white;border-radius:18px;padding:22px;text-align:left;cursor:pointer}.choice b{display:block;font-size:20px;margin-bottom:8px}.choice span{color:var(--muted);line-height:1.45}.chat-card{padding:18px}.chat{height:min(54vh,520px);overflow:auto;padding:8px;display:flex;flex-direction:column;gap:10px}.bubble{max-width:84%;padding:12px 14px;border-radius:16px;line-height:1.45}.bubble.tutor{align-self:flex-start;background:#16223a;border:1px solid var(--line)}.bubble.user{align-self:flex-end;background:rgba(124,156,255,.18);border:1px solid rgba(124,156,255,.3)}.chat-compose{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}
+@media(max-width:980px){.navcards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:820px){.hero,.grid2{grid-template-columns:1fr}.navcards{grid-template-columns:repeat(2,1fr)}.kpi-grid{grid-template-columns:repeat(2,1fr)}.shell{padding:14px 12px 70px}.card{padding:17px;border-radius:20px}.hero h1{font-size:40px}.question{font-size:23px}.topbar{align-items:flex-start}.brand{font-size:18px}.curriculum-row{grid-template-columns:48px 1fr 56px}.lesson-card{padding:20px}.choice-grid{grid-template-columns:1fr}.chat-compose{grid-template-columns:1fr}.chat-compose .primary{width:100%}}
+@media(max-width:480px){.navcards{grid-template-columns:1fr 1fr;gap:9px}.navcard{min-height:122px;padding:14px}.role-switch button{padding:8px 10px}.kpi-grid{gap:8px}.metric{font-size:28px}.lesson-wrap{width:100%}.result-card h1{font-size:46px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <main class="shell">
+      <section class="card startup-card">
+        <div class="brand">Мой <span>ИИ-репетитор</span></div>
+        <h1>Загрузка…</h1>
+        <p class="sub">Если этот текст не исчезает, проверьте, что сайт открыт в обычном браузере и JavaScript разрешён.</p>
+      </section>
+    </main>
+  </div>
+  <noscript>
+    <div class="shell"><div class="card">Для работы репетитора нужно включить JavaScript.</div></div>
+  </noscript>
+  <script>
+window.TUTOR_DATA = {
+  russianCurriculum: [
+    [1,'Богатство и выразительность русского языка'],[2,'Лингвистика как наука о языке'],
+    [3,'Звуки и буквы. Правописание гласных и согласных в корнях слов'],[4,'Буквы И, У, А после шипящих'],
+    [5,'Части речи'],[6,'Глагол'],[7,'Имя существительное'],[8,'Имя прилагательное'],[9,'Местоимение'],
+    [10,'Словосочетание. Предложение'],[11,'Пунктуация'],[12,'Язык и общение'],
+    [13,'Виды речи. Речь устная и письменная'],[14,'Монолог'],[15,'Прямая речь'],[16,'Диалог. Полилог'],
+    [17,'Читаем по-разному'],[18,'Слушание (аудирование)'],[19,'Что мы знаем о тексте'],[20,'Тема текста'],
+    [21,'Главная мысль (идея) текста'],[22,'Абзац'],[23,'Связь предложений в тексте'],
+    [24,'Повествование как функционально-смысловой тип речи'],[25,'Рассказ как разновидность текста'],
+    [26,'Рассказ на основе услышанного'],[27,'Описание как функционально-смысловой тип речи. Описание предмета'],
+    [28,'Рассуждение как функционально-смысловой тип речи'],[29,'Доказательства в рассуждении'],
+    [30,'Функциональные разновидности языка. Разговорная речь. Язык художественной литературы'],
+    [31,'Функциональные стили: научный, официально-деловой, публицистический'],
+    [32,'Фонетика как раздел лингвистики'],[33,'Гласные звуки'],[34,'Согласные звуки'],[35,'Изменение звуков в потоке речи'],
+    [36,'Согласные твёрдые и мягкие'],[37,'Согласные звонкие и глухие'],[38,'Графика'],[39,'Алфавит'],
+    [40,'Обозначение мягкости согласных с помощью мягкого знака'],[41,'Двойная роль букв Е, Ё, Ю, Я'],
+    [42,'Слог. Ударение. Орфоэпия'],[43,'Фонетический анализ слова'],[44,'Интонация, её функции'],
+    [45,'Орфография. Орфограмма'],[46,'Раздельное написание предлогов с другими словами'],[47,'Разделительные Ъ и Ь'],
+    [48,'Слово и его лексическое значение'],[49,'Однозначные и многозначные слова'],[50,'Прямое и переносное значения слов'],
+    [51,'Омонимы'],[52,'Синонимы'],[53,'Антонимы'],[54,'Паронимы'],[55,'Словари'],
+    [56,'Основные способы толкования слов'],[57,'Лексический анализ слова'],
+    [58,'Морфема — минимальная значимая единица языка'],[59,'Изменение и образование слов'],[60,'Окончание'],
+    [61,'Основа слова'],[62,'Корень слова'],[63,'Суффикс'],[64,'Приставка'],[65,'Чередование звуков'],
+    [66,'Беглые гласные'],[67,'Варианты морфем'],[68,'Морфемный анализ слова'],
+    [69,'Правописание корней с безударными проверяемыми и непроверяемыми гласными'],
+    [70,'Правописание корней с проверяемыми и непроверяемыми согласными'],
+    [71,'Правописание корней с непроизносимыми согласными'],[72,'Буквы Ё — О после шипящих в корне'],
+    [73,'Правописание гласных и согласных в приставках'],[74,'Буквы З и С на конце приставок'],
+    [75,'Буквы Ы — И после Ц'],[76,'Буквы Ы — И после приставок']
+  ],
+  mathTopics: [
+    {id:'arithmetic', title:'Вычисления', baseline:84, note:'Сильная сторона. Поддерживаем скорость и точность.'},
+    {id:'equations', title:'Уравнения', baseline:58, note:'Фокус: обратные действия и понимание равенства.'},
+    {id:'longDivision', title:'Деление столбиком', baseline:55, note:'Фокус: пошаговый алгоритм и нули в частном.'},
+    {id:'geometry', title:'Геометрия', baseline:48, note:'Фокус: точка, отрезок, луч, прямая и обозначения.'},
+    {id:'logic', title:'Логика', baseline:68, note:'Развиваем рассуждение, а не только счёт.'}
+  ],
+  questions: {
+    arithmetic: [
+      {q:'84 : 7 = ?', a:'12', hints:['Разбей 84 на 70 и 14.','Сколько семёрок в 70 и в 14?'], explain:'84 : 7 = 12.'},
+      {q:'320 − 87 = ?', a:'233', hints:['Сначала вычти 80, потом 7.','320 − 80 = 240. Теперь 240 − 7.'], explain:'320 − 87 = 233.'},
+      {q:'6 × 14 = ?', a:'84', hints:['14 = 10 + 4.','6×10 + 6×4.'], explain:'6 × 14 = 84.'}
+    ],
+    equations: [
+      {q:'x + 18 = 43. Чему равен x?', a:'25', hints:['Нужно оставить x в одиночку. Что сделали с x?','К x прибавили 18. Сделай обратное действие.'], explain:'x = 43 − 18 = 25.'},
+      {q:'x − 27 = 15. Чему равен x?', a:'42', hints:['Чтобы вернуть x, нужно отменить вычитание 27.','Какое действие обратно вычитанию?'], explain:'x = 15 + 27 = 42.'},
+      {q:'65 − x = 27. Чему равен x?', a:'38', hints:['Здесь неизвестное — вычитаемое.','Вычитаемое = уменьшаемое − разность.'], explain:'x = 65 − 27 = 38.'},
+      {q:'4x = 28. Чему равен x?', a:'7', hints:['4 одинаковых x дают 28.','Раздели 28 на 4.'], explain:'x = 28 : 4 = 7.'}
+    ],
+    longDivision: [
+      {q:'936 : 3 = ?', a:'312', hints:['Начни с 9 сотен: 9 : 3 = 3.','После 9 переходи к 3 десяткам, затем к 6 единицам.'], explain:'936 : 3 = 312.'},
+      {q:'816 : 4 = ?', a:'204', hints:['8 : 4 = 2. Что происходит с десятками 1?','1 десяток меньше 4 — в частном нужен 0, затем берём 16.'], explain:'816 : 4 = 204.'},
+      {q:'505 : 5 = ?', a:'101', hints:['5 : 5 = 1.','В разряде десятков 0 — не забудь 0 в частном.'], explain:'505 : 5 = 101.'}
+    ],
+    geometry: [
+      {q:'У фигуры есть начало A и конец B: A●────●B. Это…', a:'отрезок', aliases:['отрезок','отрезком'], hints:['У неё две границы.','Луч имеет одно начало и продолжается бесконечно, прямая — в обе стороны.'], explain:'Это отрезок AB: у него два конца.'},
+      {q:'A●────────→ продолжается вправо без конца. Это…', a:'луч', aliases:['луч','лучом'], hints:['Есть начало, но нет конца.','Сравни с солнечным лучом: он идёт от источника в одну сторону.'], explain:'Это луч: одно начало и бесконечное продолжение в одну сторону.'},
+      {q:'←────────────→ линия продолжается в обе стороны. Это…', a:'прямая', aliases:['прямая','прямую'], hints:['У неё нет ни начала, ни конца.','Она продолжается бесконечно в обе стороны.'], explain:'Это прямая.'}
+    ],
+    logic: [
+      {q:'Я загадал число. Умножил его на 4 и прибавил 3. Получилось 27. Какое число?', a:'6', hints:['Сначала отмени +3.','27 − 3 = 24. Теперь отмени умножение на 4.'], explain:'(27 − 3) : 4 = 6.'},
+      {q:'Профессор X решил: 47 + 28 = 615. В чём ошибка? Напиши правильный ответ.', a:'75', hints:['Сложи сначала единицы: 7 + 8.','15 — это 5 единиц и 1 десяток.'], explain:'47 + 28 = 75. Профессор забыл перенос десятка.'},
+      {q:'Есть 24 блока. На каждую башню нужно по 6. Сколько полных башен можно построить?', a:'4', hints:['Это задача на деление.','24 : 6.'], explain:'24 : 6 = 4 башни.'}
+    ],
+    ruBasics: [
+      {q:'Выбери существительное: «быстрый», «бежит», «кот», «он».', a:'кот', hints:['Существительное называет предмет.','Кто? Что?'], explain:'«Кот» — имя существительное.'},
+      {q:'В предложении «Кот быстро бежит» какое слово — глагол?', a:'бежит', hints:['Глагол обозначает действие.','Что делает кот?'], explain:'«Бежит» — глагол.'}
+    ],
+    ruSpeech: [
+      {q:'Один человек говорит долго, не перебивая. Это монолог или диалог?', a:'монолог', hints:['Сколько говорящих активно участвуют?','Один говорящий — монолог.'], explain:'Это монолог.'},
+      {q:'Разговор двух людей — это…', a:'диалог', hints:['«Ди-» указывает на двух участников.','Два собеседника обмениваются репликами.'], explain:'Это диалог.'}
+    ],
+    ruText: [
+      {q:'Текст рассказывает, как щенок потерялся и нашёл дорогу домой. Его тема — ?', a:'щенок', aliases:['щенок','приключение щенка','как щенок потерялся','щенок потерялся'], hints:['Тема отвечает: о чём текст?','Кто главный объект рассказа?'], explain:'Тема — история (приключение) щенка.'},
+      {q:'Как называется часть текста, которая начинается с красной строки?', a:'абзац', hints:['Она объединяет несколько предложений одной микротемой.','Начинается с красной строки.'], explain:'Это абзац.'}
+    ],
+    ruStyles: [
+      {q:'«Вода кипит при определённой температуре при нормальном давлении» — ближе к какому стилю: научному или разговорному?', a:'научному', aliases:['научный','научному'], hints:['Фраза сообщает точный факт без эмоций.','Так обычно формулируют сведения в учебнике.'], explain:'Это признак научного стиля.'}
+    ],
+    ruPhonetics: [
+      {q:'Какой согласный в слове «день» — мягкий: [д] или [н’]?', a:'н', aliases:['н','н’','нʼ'], hints:['Посмотри на мягкий знак.','Ь смягчает предыдущий согласный.'], explain:'В слове «день» мягкий согласный [н’].'},
+      {q:'Сколько слогов в слове «машина»?', a:'3', hints:['Сколько гласных — столько и слогов.','В слове гласные а, и, а.'], explain:'Три гласных — три слога: ма-ши-на.'}
+    ],
+    ruOrthography: [
+      {q:'Как правильно: «в школе» или «вшколе»?', a:'в школе', hints:['«В» здесь предлог.','Предлоги с другими словами пишутся раздельно.'], explain:'Правильно: «в школе».'},
+      {q:'Вставь знак: об__явление.', a:'ъ', aliases:['ъ','объявление'], hints:['После приставки на согласную перед я, е, ё, ю часто нужен разделительный знак.','Слово: об…явление.'], explain:'Правильно: объявление — разделительный Ъ.'}
+    ],
+    ruLexicology: [
+      {q:'«Смелый» и «храбрый» — это синонимы или антонимы?', a:'синонимы', hints:['Их значения близки.','Антонимы имеют противоположные значения.'], explain:'Это синонимы.'},
+      {q:'«Высокий» и «низкий» — это…', a:'антонимы', hints:['Значения противоположны.','Противоположные слова называются…'], explain:'Это антонимы.'},
+      {q:'«Лук» (овощ) и «лук» (оружие) — это…', a:'омонимы', hints:['Звучат и пишутся одинаково, но значения разные.','Это не многозначность, а разные слова.'], explain:'Это омонимы.'}
+    ],
+    ruMorphemics: [
+      {q:'В слове «подводный» общий с «вода, водный» корень — ?', a:'вод', aliases:['вод','-вод-'], hints:['Найди общую значимую часть родственных слов.','вода — водный — подводный.'], explain:'Корень: -вод-.'},
+      {q:'В слове «подписать» приставка — ?', a:'под', aliases:['под','под-'], hints:['Приставка стоит перед корнем.','Сравни: писать — подписать.'], explain:'Приставка: под-.'},
+      {q:'Подбери проверочное слово к «л_сной» (про лес). Напиши слово.', a:'лес', aliases:['лес','лесной'], hints:['Нужно, чтобы гласная в корне стала ударной.','Что такое место с деревьями?'], explain:'Проверочное слово: лес.'},
+      {q:'Как правильно: «бе_шумный»: бесшумный или безшумный?', a:'бесшумный', aliases:['бесшумный','с'], hints:['Перед глухим согласным в приставках без-/бес- пишется С.','Ш — глухой согласный.'], explain:'Правильно: бесшумный.'}
+    ]
+  }
+};
+
+  </script>
+  <script>
+(() => {
+  'use strict';
+  const D = window.TUTOR_DATA;
+  if (!D) throw new Error('TUTOR_DATA is missing');
+
+  const APP_VERSION = '1.0.0-web';
+  const STORAGE_KEY = 'kaiTutorStateWebV1';
+  const defaultState = {
+    role: 'child',
+    screen: 'home',
+    subject: 'math',
+    currentRuParagraph: 3,
+    profile: {name:'Кай', age:11, grade:5, sessionMinutes:40, sessionsPerWeek:3},
+    progress: {},
+    sessions: [],
+    currentLesson: null,
+    tutorMessages: [
+      {from:'tutor', text:'Привет, Кай. Напиши, что непонятно. Я не дам готовый ответ сразу — сначала разберёмся вместе.'}
+    ]
+  };
+
+  let state = loadState();
+
+  function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+  function loadState(){
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      return Object.assign(clone(defaultState), saved, {
+        profile: Object.assign({}, defaultState.profile, saved.profile || {}),
+        progress: saved.progress || {},
+        sessions: saved.sessions || [],
+        tutorMessages: saved.tutorMessages || clone(defaultState.tutorMessages)
+      });
+    } catch (e) {
+      return clone(defaultState);
+    }
+  }
+  function saveState(){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+  }
+  function esc(s){ return String(s ?? '').replace(/[&<>\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c])); }
+  function norm(s){ return String(s || '').trim().toLowerCase().replace(/ё/g,'е').replace(/[.,!?;:"'()]/g,'').replace(/\s+/g,' '); }
+  function isCorrect(q, answer){
+    const a = norm(answer);
+    return [q.a, ...(q.aliases || [])].map(norm).includes(a);
+  }
+  function shuffle(arr){
+    const a=[...arr];
+    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+    return a;
+  }
+  function pick(arr,n){
+    if(!arr.length) return [];
+    const out=[];
+    for(let i=0;i<n;i++) out.push(clone(arr[i % arr.length]));
+    return out;
+  }
+
+  function topicKey(subject,id){ return `${subject}:${id}`; }
+  function baselineForMath(id){ return D.mathTopics.find(t => t.id===id)?.baseline || 55; }
+  function getProgress(subject,id,baseline){
+    const key=topicKey(subject,id);
+    if(!state.progress[key]) state.progress[key]={attempts:0,correct:0,hints:0,mastery:baseline ?? 55,last:null,errors:[]};
+    return state.progress[key];
+  }
+  function mastery(subject,id){ return getProgress(subject,id,subject==='math'?baselineForMath(id):55).mastery; }
+  function updateProgress(subject,id,ok,hints,errorLabel){
+    const p=getProgress(subject,id,subject==='math'?baselineForMath(id):55);
+    p.attempts += 1;
+    if(ok) p.correct += 1;
+    p.hints += hints;
+    p.last = new Date().toISOString();
+    const independence=Math.max(0,1-hints*0.28);
+    p.mastery=Math.max(15,Math.min(98,Math.round(p.mastery + (ok ? 7*independence : -8))));
+    if(!ok && errorLabel){ p.errors.unshift({label:errorLabel,date:p.last}); p.errors=p.errors.slice(0,8); }
+    saveState();
+  }
+  function weakMath(){ return D.mathTopics.slice().sort((a,b)=>mastery('math',a.id)-mastery('math',b.id))[0].id; }
+  function ruDomain(n){ if(n<=11)return'ruBasics';if(n<=18)return'ruSpeech';if(n<=29)return'ruText';if(n<=31)return'ruStyles';if(n<=44)return'ruPhonetics';if(n<=47)return'ruOrthography';if(n<=57)return'ruLexicology';return'ruMorphemics'; }
+  function ruSection(n){ if(n<=11)return'Вспоминаем, повторяем, изучаем';if(n<=18)return'Язык и речь';if(n<=29)return'Текст';if(n<=31)return'Функциональные разновидности языка';if(n<=44)return'Фонетика. Графика. Орфоэпия';if(n<=47)return'Орфография';if(n<=57)return'Лексикология';return'Морфемика. Орфография'; }
+  function russianTitle(n){ return D.russianCurriculum[n-1]?.[1] || 'Русский язык'; }
+
+  function buildLesson(subject,mode='lesson'){
+    if(subject==='math'){
+      if(mode==='control'){
+        const pool=[];
+        D.mathTopics.forEach(t => (D.questions[t.id] || []).forEach(q => pool.push({...q,topic:t.id})));
+        return shuffle(pool).slice(0,10);
+      }
+      const topic=weakMath();
+      return pick(shuffle(D.questions[topic] || []),6).map(q=>({...q,topic}));
+    }
+    const n=state.currentRuParagraph;
+    const domain=ruDomain(n);
+    if(mode==='control'){
+      const domains=['ruBasics','ruSpeech','ruText','ruStyles','ruPhonetics','ruOrthography','ruLexicology','ruMorphemics'];
+      const pool=[];
+      domains.forEach(d => (D.questions[d] || []).forEach(q => pool.push({...q,topic:d})));
+      return shuffle(pool).slice(0,10);
+    }
+    return pick(shuffle(D.questions[domain] || []),6).map(q=>({...q,topic:domain}));
+  }
+
+  function startLesson(subject,mode='lesson'){
+    const qs=buildLesson(subject,mode);
+    state.subject=subject;
+    state.currentLesson={subject,mode,qs,index:0,hintIndex:0,answers:[],started:Date.now(),feedback:null};
+    state.screen='lesson';
+    saveState(); render();
+  }
+  function finishLesson(){
+    const L=state.currentLesson;
+    const correct=L.answers.filter(x=>x.ok).length;
+    const hints=L.answers.reduce((s,x)=>s+x.hints,0);
+    const minutes=Math.max(1,Math.round((Date.now()-L.started)/60000));
+    state.sessions.unshift({
+      date:new Date().toISOString(), subject:L.subject, mode:L.mode,
+      correct,total:L.qs.length,hints,minutes,
+      paragraph:L.subject==='ru'?state.currentRuParagraph:null
+    });
+    state.sessions=state.sessions.slice(0,60);
+    state.screen='summary';
+    saveState(); render();
+  }
+
+  function shell(content){
+    return `<div class="shell">
+      <header class="topbar">
+        <button class="brand brand-button" data-action="home" aria-label="На главную">Мой <span>ИИ-репетитор</span></button>
+        <div class="role-switch" aria-label="Режим интерфейса">
+          <button class="${state.role==='child'?'active':''}" data-role="child">Кай</button>
+          <button class="${state.role==='parent'?'active':''}" data-role="parent">Родитель</button>
+        </div>
+      </header>
+      ${content}
+      <footer class="site-footer">Версия ${APP_VERSION} · прогресс хранится на этом устройстве</footer>
+    </div>`;
+  }
+  function topicCard(title,pct,note){
+    return `<div class="topic"><div class="topic-head"><div><h3>${esc(title)}</h3><div class="tiny">${esc(note)}</div></div><b>${pct}%</b></div><div class="bar"><span style="width:${pct}%"></span></div></div>`;
+  }
+
+  function childHome(){
+    const weak=weakMath();
+    const weakTopic=D.mathTopics.find(t=>t.id===weak);
+    const currentRuMastery=mastery('ru',ruDomain(state.currentRuParagraph));
+    return shell(`
+      <section class="hero">
+        <div class="card hero-main">
+          <span class="pill">5 класс · персональный маршрут</span>
+          <h1>Привет, ${esc(state.profile.name)}.</h1>
+          <p class="sub">Сегодня — короткие шаги, схемы и задачи. Никаких длинных лекций: сначала думаем, потом формулируем правило.</p>
+          <div class="btnrow">
+            <button class="primary big" data-action="start-math">Начать занятие</button>
+            <button class="secondary" data-action="start-ru">Русский по учебнику</button>
+          </div>
+        </div>
+        <div class="card focus-card">
+          <div class="eyebrow">Фокус сегодня</div>
+          <div class="focus-title">${esc(weakTopic.title)}</div>
+          <p class="sub">${esc(weakTopic.note)}</p>
+          <div class="chiprow"><span class="tag">~40 минут</span><span class="tag">короткие шаги</span></div>
+        </div>
+      </section>
+
+      <section class="navcards">
+        <button class="navcard" data-action="weak"><span class="navicon">↺</span><b>Повторить слабое</b><small>Задания на те места, где раньше были ошибки.</small></button>
+        <button class="navcard" data-action="choose-control"><span class="navicon">✓</span><b>Контрольная</b><small>Без подсказок. Разбор после окончания.</small></button>
+        <button class="navcard" data-action="homework"><span class="navicon">▣</span><b>Разобрать домашку</b><small>Фото задания и похожие тренировочные примеры.</small></button>
+        <button class="navcard" data-action="tutor"><span class="navicon">?</span><b>Спросить репетитора</b><small>Короткое объяснение без готового ответа.</small></button>
+        <button class="navcard" data-action="progress"><span class="navicon">↗</span><b>Мой прогресс</b><small>Темы, уровни и самостоятельность.</small></button>
+      </section>
+
+      <section class="grid2">
+        <div class="card stack"><div class="section-title">Математика</div>${D.mathTopics.map(t=>topicCard(t.title,mastery('math',t.id),t.note)).join('')}</div>
+        <div class="card">
+          <div class="section-title">Русский язык</div>
+          <div class="topic current-topic"><div class="topic-head"><div><h3>Сейчас в школе</h3><div class="tiny">§ ${state.currentRuParagraph}. ${esc(russianTitle(state.currentRuParagraph))}</div></div><b>${currentRuMastery}%</b></div><div class="bar"><span style="width:${currentRuMastery}%"></span></div></div>
+          <div class="mission"><b>Как работает репетитор</b><p class="sub compact">Ошибка → вопрос → подсказка → ещё одна подсказка → разбор. Готовый ответ не появляется после первой ошибки.</p></div>
+        </div>
+      </section>`);
+  }
+
+  function lessonView(){
+    const L=state.currentLesson;
+    if(!L || !L.qs.length) return shell(`<div class="card">Для этой темы пока нет тестовых заданий. <button class="secondary" data-action="home">На главную</button></div>`);
+    const q=L.qs[L.index];
+    const noHints=L.mode==='control';
+    const title=L.subject==='math' ? (D.mathTopics.find(t=>t.id===q.topic)?.title || 'Математика') : `§ ${state.currentRuParagraph}. ${russianTitle(state.currentRuParagraph)}`;
+    return shell(`
+      <main class="lesson-wrap">
+        <div class="screen-title"><button class="back" data-action="home">←</button><div><div class="eyebrow">${L.subject==='math'?'Математика':'Русский язык'} · ${L.mode==='control'?'контрольная':'занятие'}</div><h2>${esc(title)}</h2></div></div>
+        <div class="lesson-progress">${L.qs.map((_,i)=>`<span class="${i<L.index?'done':i===L.index?'current':''}"></span>`).join('')}</div>
+        <section class="card lesson-card">
+          <span class="pill">Задание ${L.index+1} из ${L.qs.length}</span>
+          <div class="question">${esc(q.q)}</div>
+          <label class="answer-label" for="answer">Твой ответ</label>
+          <input id="answer" class="answer" autocomplete="off" autocapitalize="sentences" />
+          ${L.feedback?`<div class="feedback ${L.feedback.ok?'ok':'bad'}">${esc(L.feedback.text)}</div>`:''}
+          ${L.hintIndex>0 && !noHints?`<div class="hintbox"><b>Подсказка ${L.hintIndex}</b><div>${esc(q.hints[Math.min(L.hintIndex-1,q.hints.length-1)])}</div></div>`:''}
+          <div class="btnrow"><button class="primary" data-action="check">Проверить</button>${!noHints?`<button class="secondary" data-action="hint">Подсказка</button>`:''}<button class="ghost" data-action="skip">Пропустить</button></div>
+        </section>
+        <div class="footer-note">Подсказки учитываются отдельно: правильный ответ с подсказкой и полностью самостоятельное решение — не одно и то же.</div>
+      </main>`);
+  }
+
+  function summaryView(){
+    const s=state.sessions[0];
+    const pct=Math.round(100*s.correct/s.total);
+    const independent=Math.max(0,100-Math.min(100,Math.round((s.hints/Math.max(1,s.total))*28)));
+    const message=pct>=80?'Материал в целом понятен. Следующее занятие можно немного усложнить.':pct>=60?'Основа есть, но часть навыков надо закрепить.':'Лучше вернуться на шаг назад и объяснить тему другим способом.';
+    return shell(`<main class="lesson-wrap"><section class="card result-card"><span class="pill">Занятие завершено</span><h1>${s.correct} из ${s.total}</h1><p class="sub">${message}</p><div class="kpi-grid"><div class="kpi"><div class="metric">${pct}%</div><div class="metric-label">точность</div></div><div class="kpi"><div class="metric">${s.hints}</div><div class="metric-label">подсказок</div></div><div class="kpi"><div class="metric">${independent}%</div><div class="metric-label">самостоятельность</div></div><div class="kpi"><div class="metric">${s.minutes}</div><div class="metric-label">минут</div></div></div><div class="btnrow"><button class="primary" data-action="home">На главную</button><button class="secondary" data-action="weak">Повторить слабое</button></div></section></main>`);
+  }
+
+  function progressView(){
+    return shell(`<div class="screen-title"><button class="back" data-action="home">←</button><h2>Мой прогресс</h2></div><div class="grid2"><section class="card stack"><div class="section-title">Математика</div>${D.mathTopics.map(t=>topicCard(t.title,mastery('math',t.id),t.note)).join('')}</section><section class="card stack"><div class="section-title">Русский язык</div>${['ruBasics','ruSpeech','ruText','ruStyles','ruPhonetics','ruOrthography','ruLexicology','ruMorphemics'].map((d,i)=>topicCard(['Повторение','Язык и речь','Текст','Стили','Фонетика','Орфография','Лексикология','Морфемика'][i],mastery('ru',d),'По части 1 школьного учебника')).join('')}</section></div>`);
+  }
+
+  function homeworkView(){
+    return shell(`<div class="screen-title"><button class="back" data-action="home">←</button><h2>Разобрать домашку</h2></div><div class="grid2"><section class="card"><div class="section-title">Русский язык</div><label class="field-label" for="ru-paragraph">Текущий параграф</label><select id="ru-paragraph" class="select">${D.russianCurriculum.map(([n,t])=>`<option value="${n}" ${n===state.currentRuParagraph?'selected':''}>§ ${n}. ${esc(t)}</option>`).join('')}</select><div class="recommend"><b>${esc(ruSection(state.currentRuParagraph))}</b><br><span class="tiny">Репетитор даст несколько похожих примеров и только потом вернётся к домашнему заданию.</span></div><div class="btnrow"><button class="primary" data-action="start-ru">Потренироваться по §</button></div></section><section class="card"><div class="section-title">Фото задания</div><label class="upload" for="hwfile"><span class="upload-icon">＋</span><b>Выбрать или сфотографировать</b><span class="tiny">В этой версии фото можно прикрепить и посмотреть. Автоматическое распознавание подключается вместе с серверным ИИ.</span></label><input id="hwfile" class="hidden-file" type="file" accept="image/*" capture="environment"/><div id="preview" class="preview"></div></section></div>`);
+  }
+
+  function controlChooser(){
+    return shell(`<main class="lesson-wrap"><div class="screen-title"><button class="back" data-action="home">←</button><h2>Контрольная</h2></div><section class="card"><p class="sub">10 заданий, подсказки отключены. Ошибки разбираются только после окончания.</p><div class="choice-grid"><button class="choice" data-action="control-math"><b>Математика</b><span>Уравнения, деление, геометрия, логика</span></button><button class="choice" data-action="control-ru"><b>Русский язык</b><span>Темы по части 1 учебника</span></button></div></section></main>`);
+  }
+
+  function tutorView(){
+    const msgs=state.tutorMessages.slice(-16).map(m=>`<div class="bubble ${m.from==='user'?'user':'tutor'}">${esc(m.text)}</div>`).join('');
+    return shell(`<main class="lesson-wrap"><div class="screen-title"><button class="back" data-action="home">←</button><div><div class="eyebrow">Демо-помощник</div><h2>Спросить репетитора</h2></div></div><section class="card chat-card"><div class="chat" id="chat">${msgs}</div><div class="chat-compose"><input id="tutor-input" class="answer" placeholder="Например: не понимаю, почему в уравнении надо вычитать 18"/><button class="primary" data-action="send-tutor">Отправить</button></div><div class="footer-note">Сейчас это локальный демонстрационный помощник. Настоящий ИИ-диалог будет подключён на сервере, чтобы не хранить секретный API-ключ в браузере.</div></section></main>`);
+  }
+
+  function parentHome(){
+    const recent=state.sessions.slice(0,6);
+    const totalMinutes=state.sessions.reduce((s,x)=>s+x.minutes,0);
+    const recentHints=recent.reduce((s,x)=>s+x.hints,0);
+    const recentTasks=recent.reduce((s,x)=>s+x.total,0);
+    const weak=weakMath();
+    const weakTopic=D.mathTopics.find(t=>t.id===weak);
+    const recentRows=recent.length?recent.map(s=>`<tr><td>${new Date(s.date).toLocaleDateString('ru-RU')}</td><td>${s.subject==='math'?'Математика':'Русский'}</td><td>${s.correct}/${s.total}</td><td>${s.hints}</td></tr>`).join(''):`<tr><td colspan="4" class="tiny">Пока нет завершённых занятий.</td></tr>`;
+    return shell(`
+      <section class="hero parent-hero"><div class="card"><span class="pill">Родительский кабинет</span><h1>Видно не только оценку, но и причину ошибки.</h1><p class="sub">Отдельно отслеживаются самостоятельность, подсказки, слабые навыки и школьный параграф.</p></div><div class="card"><div class="eyebrow">Рекомендация</div><div class="focus-title">${esc(weakTopic.title)}</div><p class="sub">На следующем занятии 7–10 минут на этот навык + русский по текущему параграфу.</p></div></section>
+      <section class="kpi-grid"><div class="kpi"><div class="metric">${state.sessions.length}</div><div class="metric-label">занятий</div></div><div class="kpi"><div class="metric">${totalMinutes}</div><div class="metric-label">минут</div></div><div class="kpi"><div class="metric">${recentTasks}</div><div class="metric-label">недавних заданий</div></div><div class="kpi"><div class="metric">${recentHints}</div><div class="metric-label">подсказок</div></div></section>
+      <section class="grid2 section-gap"><div class="card stack"><div class="section-title">Математика</div>${D.mathTopics.map(t=>topicCard(t.title,mastery('math',t.id),t.note)).join('')}</div><div class="card"><div class="section-title">Русский · школьная программа</div><label class="field-label" for="parent-ru">Текущий параграф</label><select id="parent-ru" class="select">${D.russianCurriculum.map(([n,t])=>`<option value="${n}" ${n===state.currentRuParagraph?'selected':''}>§ ${n}. ${esc(t)}</option>`).join('')}</select><div class="recommend"><b>Сейчас:</b> § ${state.currentRuParagraph}. ${esc(russianTitle(state.currentRuParagraph))}<br><span class="tiny">Раздел: ${esc(ruSection(state.currentRuParagraph))}</span></div></div></section>
+      <section class="card section-gap"><div class="section-title">Последние занятия</div><div class="table-wrap"><table class="table"><thead><tr><th>Дата</th><th>Предмет</th><th>Результат</th><th>Подсказки</th></tr></thead><tbody>${recentRows}</tbody></table></div></section>
+      <section class="card section-gap"><div class="section-title">Русский язык · часть 1</div><div class="curriculum">${D.russianCurriculum.map(([n,t])=>{const m=mastery('ru',ruDomain(n)); return `<div class="curriculum-row ${n===state.currentRuParagraph?'current':''}"><div><span class="statusdot ${m>=75?'good':m>=55?'mid':''}"></span>§ ${n}</div><div>${esc(t)}</div><div>${m}%</div></div>`}).join('')}</div></section>
+      <section class="card section-gap"><div class="section-title">Данные</div><div class="btnrow"><button class="secondary" data-action="export">Экспорт прогресса</button><button class="ghost danger-text" data-action="reset">Сбросить данные</button></div></section>`);
+  }
+
+  function tutorReply(text){
+    const n=norm(text);
+    if(/уравнен|x|икс/.test(n)) return 'Покажи само уравнение. Сначала определим, какое действие сделали с неизвестным. Потом подберём обратное действие — без «переноса через равно».';
+    if(/делен|столб/.test(n)) return 'Разберём по одному разряду. Напиши пример. Я буду задавать по одному вопросу: сколько раз делитель помещается в первой части делимого, что записываем в частное и что сносим дальше.';
+    if(/луч|отрез|прям/.test(n)) return 'Смотри на количество границ: у отрезка два конца, у луча одно начало, у прямой нет ни начала, ни конца. Напиши, что именно путается — название или построение?';
+    if(/корен|пристав|суффикс|морфем/.test(n)) return 'Возьмём слово и сравним его с родственными словами. Так легче увидеть общую часть и отделить приставку или суффикс. Напиши слово.';
+    if(/правил|русск|параграф|§/.test(n)) return `Сейчас выбран § ${state.currentRuParagraph}: «${russianTitle(state.currentRuParagraph)}». Напиши, что именно в нём непонятно, и я объясню коротко на одном примере.`;
+    return 'Давай разберём по шагам. Напиши конкретный пример или одно предложение из задания. Я сначала задам вопрос, который поможет самому увидеть следующий шаг.';
+  }
+
+  function render(){
+    const app=document.getElementById('app');
+    if(!app) return;
+    let html='';
+    if(state.screen==='lesson') html=lessonView();
+    else if(state.screen==='summary') html=summaryView();
+    else if(state.screen==='progress') html=progressView();
+    else if(state.screen==='homework') html=homeworkView();
+    else if(state.screen==='control') html=controlChooser();
+    else if(state.screen==='tutor') html=tutorView();
+    else html=state.role==='parent'?parentHome():childHome();
+    app.innerHTML=html;
+    bind();
+  }
+
+  function bind(){
+    document.querySelectorAll('[data-role]').forEach(el=>el.addEventListener('click',()=>{state.role=el.dataset.role;state.screen='home';state.currentLesson=null;saveState();render();}));
+    document.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',()=>act(el.dataset.action)));
+    const ru=document.getElementById('ru-paragraph');
+    if(ru) ru.addEventListener('change',()=>{state.currentRuParagraph=Number(ru.value);saveState();render();});
+    const pru=document.getElementById('parent-ru');
+    if(pru) pru.addEventListener('change',()=>{state.currentRuParagraph=Number(pru.value);saveState();render();});
+    const file=document.getElementById('hwfile');
+    if(file) file.addEventListener('change',e=>{
+      const f=e.target.files?.[0]; if(!f) return;
+      const url=URL.createObjectURL(f);
+      const preview=document.getElementById('preview');
+      if(preview) preview.innerHTML=`<img src="${url}" alt="Фото домашнего задания" class="preview-image">`;
+    });
+    const ans=document.getElementById('answer');
+    if(ans) ans.addEventListener('keydown',e=>{if(e.key==='Enter')act('check');});
+    const tutorInput=document.getElementById('tutor-input');
+    if(tutorInput) tutorInput.addEventListener('keydown',e=>{if(e.key==='Enter')act('send-tutor');});
+    const chat=document.getElementById('chat');
+    if(chat) chat.scrollTop=chat.scrollHeight;
+  }
+
+  function act(action){
+    if(action==='home'){state.screen='home';state.currentLesson=null;saveState();return render();}
+    if(action==='start-math') return startLesson('math','lesson');
+    if(action==='start-ru') return startLesson('ru','lesson');
+    if(action==='weak') return startLesson('math','weak');
+    if(action==='choose-control'){state.screen='control';saveState();return render();}
+    if(action==='control-math') return startLesson('math','control');
+    if(action==='control-ru') return startLesson('ru','control');
+    if(action==='homework'){state.screen='homework';saveState();return render();}
+    if(action==='progress'){state.screen='progress';saveState();return render();}
+    if(action==='tutor'){state.screen='tutor';saveState();return render();}
+    if(action==='hint'){
+      const L=state.currentLesson, q=L.qs[L.index];
+      L.hintIndex=Math.min(q.hints.length,L.hintIndex+1); L.feedback=null; saveState(); return render();
+    }
+    if(action==='skip') return recordAnswer(false,true,'');
+    if(action==='check'){
+      const input=document.getElementById('answer');
+      const answer=input?.value || '';
+      if(!answer.trim()){ input?.focus(); return; }
+      const L=state.currentLesson, q=L.qs[L.index], ok=isCorrect(q,answer);
+      if(ok){
+        L.feedback={ok:true,text:'Верно. Хорошо. Теперь запомни не ответ, а способ.'}; saveState(); render(); setTimeout(()=>recordAnswer(true,false,answer),550);
+      } else if(L.mode==='control'){
+        L.feedback={ok:false,text:'Ответ сохранён. Разберём после контрольной.'}; saveState(); render(); setTimeout(()=>recordAnswer(false,false,answer),550);
+      } else {
+        L.feedback={ok:false,text:'Пока не сходится. Не спешим: возьми подсказку и попробуй ещё раз.'}; saveState(); render();
+      }
+      return;
+    }
+    if(action==='send-tutor'){
+      const input=document.getElementById('tutor-input');
+      const text=input?.value.trim(); if(!text) return;
+      state.tutorMessages.push({from:'user',text});
+      state.tutorMessages.push({from:'tutor',text:tutorReply(text)});
+      state.tutorMessages=state.tutorMessages.slice(-20); saveState(); render(); return;
+    }
+    if(action==='export'){
+      const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download='kai-tutor-progress.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); return;
+    }
+    if(action==='reset'){
+      if(confirm('Сбросить весь сохранённый прогресс на этом устройстве?')){ try{localStorage.removeItem(STORAGE_KEY);}catch(e){} state=clone(defaultState); render(); }
+    }
+  }
+
+  function recordAnswer(ok,skipped=false,answer=''){
+    const L=state.currentLesson;
+    if(!L || !L.qs[L.index]) return;
+    const q=L.qs[L.index];
+    updateProgress(L.subject==='math'?'math':'ru',q.topic,ok,L.hintIndex,!ok?`Ошибка: ${q.q}`:null);
+    L.answers.push({ok,hints:L.hintIndex,answer,skipped});
+    L.index += 1; L.hintIndex=0; L.feedback=null;
+    if(L.index>=L.qs.length) return finishLesson();
+    saveState(); render();
+  }
+
+  render();
+})();
+
+  </script>
+</body>
+</html>
