@@ -1,512 +1,217 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b1220" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Репетитор Кая" />
-  <meta name="description" content="Персональный ИИ-репетитор Кая: математика 5 класса и русский язык по учебнику Ладыженской, часть 1." />
-  <title>Мой ИИ-репетитор — Кай</title>
-  <style>
-:root{
-  --bg:#0b1220;--panel:#111a2e;--panel2:#18233c;--text:#f8fafc;--muted:#a9b4c8;
-  --accent:#7c9cff;--accent2:#68d6c7;--danger:#ff8f8f;--ok:#8be2a9;--warn:#f5cc68;--line:#2a3857;
-  --shadow:0 18px 60px rgba(0,0,0,.25);--radius:24px
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;background:var(--bg)}
-body{margin:0;min-height:100vh;background:radial-gradient(circle at 20% 0%,#17264a 0,#0b1220 38%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,select,textarea{font:inherit}.shell{max-width:1180px;margin:0 auto;padding:20px 18px 80px}.startup-card{max-width:620px;margin:12vh auto 0}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{font-weight:850;letter-spacing:-.04em;font-size:22px;color:white}.brand span{color:var(--accent2)}.brand-button{border:0;background:transparent;padding:0;cursor:pointer;text-align:left}.role-switch{display:flex;padding:4px;border:1px solid var(--line);border-radius:999px;background:rgba(17,26,46,.75);backdrop-filter:blur(10px)}.role-switch button{border:0;background:transparent;color:var(--muted);padding:9px 14px;border-radius:999px;cursor:pointer}.role-switch button.active{background:var(--panel2);color:white}
-.card{background:linear-gradient(180deg,rgba(24,35,60,.97),rgba(17,26,46,.97));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:18px;margin-bottom:18px}.hero h1{font-size:clamp(34px,5vw,58px);line-height:.98;letter-spacing:-.055em;margin:10px 0 14px}.parent-hero h1{font-size:clamp(30px,4vw,48px)}.sub{color:var(--muted);font-size:16px;line-height:1.55;margin:0}.sub.compact{margin-top:6px}.pill{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(124,156,255,.13);border:1px solid rgba(124,156,255,.28);color:#dce5ff;font-size:13px;font-weight:750}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);font-weight:800}.focus-title{font-size:24px;font-weight:850;letter-spacing:-.03em;margin:8px 0}.chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.tag{display:inline-block;padding:5px 9px;border-radius:999px;background:#0e172a;border:1px solid var(--line);color:#cbd5e1;font-size:12px}
-.primary,.secondary,.ghost,.back,.navcard,.choice{touch-action:manipulation}.primary{border:0;background:linear-gradient(135deg,var(--accent),#a885ff);color:white;font-weight:800;padding:14px 18px;border-radius:16px;cursor:pointer;box-shadow:0 10px 28px rgba(124,156,255,.25)}.primary.big{padding:16px 22px}.secondary{border:1px solid var(--line);background:#17233c;color:white;font-weight:750;padding:13px 16px;border-radius:16px;cursor:pointer}.ghost{border:0;background:transparent;color:var(--muted);cursor:pointer;padding:10px}.back{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:#101a2f;color:white;cursor:pointer;font-size:22px}.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.danger-text{color:var(--danger)}
-.navcards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:18px 0}.navcard{background:rgba(24,35,60,.78);border:1px solid var(--line);border-radius:18px;padding:17px;color:white;text-align:left;cursor:pointer;min-height:132px;transition:transform .15s ease,border-color .15s ease}.navcard:hover{transform:translateY(-2px);border-color:#455b8d}.navcard b{display:block;margin:8px 0 6px}.navcard small{color:var(--muted);line-height:1.4}.navicon{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:10px;background:rgba(124,156,255,.13);color:#dce5ff;font-weight:900}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.stack{display:flex;flex-direction:column;gap:10px}.topic{padding:18px;border-radius:20px;background:rgba(11,18,32,.45);border:1px solid var(--line)}.topic-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.topic h3{margin:0 0 4px;font-size:17px}.bar{height:8px;background:#0d1528;border-radius:999px;overflow:hidden;margin-top:12px}.bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:999px}.mission{border:1px solid rgba(168,133,255,.28);background:linear-gradient(135deg,rgba(124,156,255,.08),rgba(168,133,255,.08));border-radius:20px;padding:18px;margin-top:14px}
-.screen-title{display:flex;align-items:center;gap:12px;margin:4px 0 18px}.screen-title h2{margin:0;font-size:28px;letter-spacing:-.03em}.lesson-wrap{max-width:760px;margin:0 auto}.lesson-progress{display:flex;gap:6px;margin:14px 0 22px}.lesson-progress span{height:7px;flex:1;background:#1c2945;border-radius:999px}.lesson-progress span.done{background:var(--accent2)}.lesson-progress span.current{background:var(--accent)}.lesson-card{padding:26px}.question{font-size:clamp(24px,4vw,31px);font-weight:800;line-height:1.3;margin:18px 0 20px;white-space:pre-wrap}.answer-label,.field-label{display:block;font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}.answer,.select{width:100%;padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:#0d1629;color:white;outline:none}.select{padding:13px 14px}.answer:focus,.select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,156,255,.12)}.feedback{margin-top:14px;padding:14px 16px;border-radius:16px;line-height:1.5}.feedback.ok{background:rgba(139,226,169,.12);border:1px solid rgba(139,226,169,.3)}.feedback.bad{background:rgba(255,143,143,.1);border:1px solid rgba(255,143,143,.28)}.hintbox{margin-top:12px;padding:14px 16px;border-left:3px solid var(--accent);background:rgba(124,156,255,.08);border-radius:12px;color:#dfe6f7}.hintbox b{display:block;margin-bottom:5px}.footer-note{margin-top:20px;color:var(--muted);font-size:12px;line-height:1.5}.site-footer{margin-top:34px;text-align:center;color:#71809d;font-size:11px}.tiny{font-size:12px;color:var(--muted)}
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.kpi{background:rgba(11,18,32,.45);border:1px solid var(--line);border-radius:18px;padding:16px}.metric{font-size:34px;font-weight:850;letter-spacing:-.04em}.metric-label{color:var(--muted);font-size:13px;margin-top:3px}.result-card h1{font-size:54px;letter-spacing:-.05em;margin:16px 0 4px}.section-title{font-size:13px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);margin:0 0 12px;font-weight:800}.section-gap{margin-top:16px}.recommend{padding:15px;border:1px solid rgba(104,214,199,.25);background:rgba(104,214,199,.08);border-radius:16px;line-height:1.5;margin-top:14px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:520px}.table td,.table th{padding:12px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.table th{color:var(--muted);font-weight:700}.curriculum{max-height:500px;overflow:auto;padding-right:6px}.curriculum-row{display:grid;grid-template-columns:58px 1fr 78px;gap:12px;align-items:center;padding:10px 8px;border-bottom:1px solid rgba(42,56,87,.7)}.curriculum-row.current{background:rgba(124,156,255,.08);border-radius:12px}.statusdot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;background:#65718a}.statusdot.good{background:var(--ok)}.statusdot.mid{background:var(--warn)}
-.upload{display:flex;min-height:180px;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed #45577f;border-radius:18px;padding:18px;text-align:center;background:rgba(13,22,41,.55);cursor:pointer}.upload-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:16px;background:rgba(124,156,255,.12);font-size:28px}.hidden-file{position:absolute;left:-9999px}.preview{margin-top:12px}.preview-image{max-width:100%;max-height:440px;border-radius:16px;border:1px solid var(--line);display:block;margin:auto}
-.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.choice{border:1px solid var(--line);background:#101a2f;color:white;border-radius:18px;padding:22px;text-align:left;cursor:pointer}.choice b{display:block;font-size:20px;margin-bottom:8px}.choice span{color:var(--muted);line-height:1.45}.chat-card{padding:18px}.chat{height:min(54vh,520px);overflow:auto;padding:8px;display:flex;flex-direction:column;gap:10px}.bubble{max-width:84%;padding:12px 14px;border-radius:16px;line-height:1.45}.bubble.tutor{align-self:flex-start;background:#16223a;border:1px solid var(--line)}.bubble.user{align-self:flex-end;background:rgba(124,156,255,.18);border:1px solid rgba(124,156,255,.3)}.chat-compose{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}
-@media(max-width:980px){.navcards{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:820px){.hero,.grid2{grid-template-columns:1fr}.navcards{grid-template-columns:repeat(2,1fr)}.kpi-grid{grid-template-columns:repeat(2,1fr)}.shell{padding:14px 12px 70px}.card{padding:17px;border-radius:20px}.hero h1{font-size:40px}.question{font-size:23px}.topbar{align-items:flex-start}.brand{font-size:18px}.curriculum-row{grid-template-columns:48px 1fr 56px}.lesson-card{padding:20px}.choice-grid{grid-template-columns:1fr}.chat-compose{grid-template-columns:1fr}.chat-compose .primary{width:100%}}
-@media(max-width:480px){.navcards{grid-template-columns:1fr 1fr;gap:9px}.navcard{min-height:122px;padding:14px}.role-switch button{padding:8px 10px}.kpi-grid{gap:8px}.metric{font-size:28px}.lesson-wrap{width:100%}.result-card h1{font-size:46px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<title>Мой ИИ-репетитор — Кай</title>
+<style>
+:root{--bg:#0b1220;--panel:#14203a;--panel2:#1b2948;--text:#f8fafc;--muted:#aab6cc;--accent:#7c9cff;--accent2:#68d6c7;--line:#2a3a5c;--ok:#8be2a9;--bad:#ff9b9b;--warn:#ffd27a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#1a2c55 0,#0b1220 38%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit}.shell{max-width:1050px;margin:auto;padding:16px 14px 70px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.brand{font-weight:900;font-size:20px}.brand span{color:var(--accent2)}.switch{display:flex;background:#111b31;border:1px solid var(--line);padding:4px;border-radius:999px}.switch button{border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:999px}.switch .on{background:var(--panel2);color:white}
+.card{background:linear-gradient(180deg,#192743,#121d34);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 16px 45px #0005}.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}.hero h1{font-size:clamp(34px,7vw,58px);line-height:.98;margin:10px 0 14px;letter-spacing:-.05em}.muted{color:var(--muted);line-height:1.5}.pill{display:inline-block;padding:7px 10px;border:1px solid #536da3;border-radius:999px;color:#dce5ff;font-size:12px}.pill.warn{border-color:#806a37;color:#ffe5a4}.pill.ok{border-color:#2d6b55;color:#a7f1ca}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.primary,.secondary,.ghost{border-radius:15px;padding:13px 16px;cursor:pointer}.primary{border:0;background:linear-gradient(135deg,var(--accent),#a887ff);color:white;font-weight:800}.secondary{border:1px solid var(--line);background:#172440;color:white;font-weight:700}.ghost{border:0;background:transparent;color:var(--muted)}.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}.nav button{min-height:112px;text-align:left;border:1px solid var(--line);background:#14213b;color:white;border-radius:18px;padding:15px}.nav b{display:block;margin-bottom:6px}.nav small{color:var(--muted);line-height:1.35}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.topic{padding:14px;border:1px solid var(--line);background:#0d172a;border-radius:16px;margin-top:10px}.topichead{display:flex;justify-content:space-between;gap:10px}.bar{height:8px;background:#08101f;border-radius:99px;overflow:hidden;margin-top:10px}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent))}.lesson{max-width:780px;margin:auto}.q{font-size:clamp(23px,5vw,31px);font-weight:800;line-height:1.35;margin:20px 0;white-space:pre-wrap}.answer,select{width:100%;background:#0b1528;color:white;border:1px solid var(--line);border-radius:14px;padding:14px}.answer:focus,select:focus{outline:2px solid var(--accent)}.hint,.feedback,.theorybox,.examplebox{padding:14px 15px;border-radius:16px;margin-top:12px;line-height:1.52}.hint{background:#17284b;border-left:3px solid var(--accent)}.feedback.ok{background:#123825;border:1px solid #2b6c4a}.feedback.bad{background:#3a1d27;border:1px solid #7a3c4b}.theorybox{background:#101c33;border:1px solid #304466}.examplebox{background:#112c2f;border:1px solid #2e6660}.theorybox h3,.examplebox h3{margin-top:0}.progress{display:flex;gap:5px;margin:14px 0 20px}.progress i{height:7px;flex:1;background:#253655;border-radius:9px}.progress .done{background:var(--accent2)}.progress .cur{background:var(--accent)}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.kpi{padding:15px;background:#111c32;border:1px solid var(--line);border-radius:16px}.kpi strong{font-size:30px}.table{width:100%;border-collapse:collapse}.table td,.table th{padding:10px 6px;border-bottom:1px solid var(--line);text-align:left}.table th{color:var(--muted)}.curr{max-height:470px;overflow:auto}.currrow{display:grid;grid-template-columns:50px 1fr 52px;gap:8px;padding:9px 4px;border-bottom:1px solid var(--line)}.current{background:#1b2b4b;border-radius:10px}.tiny{font-size:12px;color:var(--muted)}.choice{display:block;width:100%;text-align:left;margin:9px 0;padding:13px;border-radius:13px;border:1px solid var(--line);background:#101b31;color:white}.choice:hover{border-color:#5571aa}.diagram{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#081120;border-radius:14px;padding:16px;white-space:pre-wrap;font-size:16px;line-height:1.6}.steps{counter-reset:s}.step{position:relative;padding:12px 12px 12px 44px;border:1px solid var(--line);border-radius:14px;margin:9px 0;background:#0f1a2f}.step:before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:11px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#243a67;color:#fff;font-weight:800}.footer{text-align:center;color:#64738f;font-size:11px;margin-top:25px}
+@media(max-width:800px){.hero,.grid2,.grid3{grid-template-columns:1fr}.nav{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:1fr 1fr}.card{padding:16px}.shell{padding:12px 10px 60px}}
+</style>
 </head>
-<body>
-  <div id="app">
-    <main class="shell">
-      <section class="card startup-card">
-        <div class="brand">Мой <span>ИИ-репетитор</span></div>
-        <h1>Загрузка…</h1>
-        <p class="sub">Если этот текст не исчезает, проверьте, что сайт открыт в обычном браузере и JavaScript разрешён.</p>
-      </section>
-    </main>
-  </div>
-  <noscript>
-    <div class="shell"><div class="card">Для работы репетитора нужно включить JavaScript.</div></div>
-  </noscript>
-  <script>
-window.TUTOR_DATA = {
-  russianCurriculum: [
-    [1,'Богатство и выразительность русского языка'],[2,'Лингвистика как наука о языке'],
-    [3,'Звуки и буквы. Правописание гласных и согласных в корнях слов'],[4,'Буквы И, У, А после шипящих'],
-    [5,'Части речи'],[6,'Глагол'],[7,'Имя существительное'],[8,'Имя прилагательное'],[9,'Местоимение'],
-    [10,'Словосочетание. Предложение'],[11,'Пунктуация'],[12,'Язык и общение'],
-    [13,'Виды речи. Речь устная и письменная'],[14,'Монолог'],[15,'Прямая речь'],[16,'Диалог. Полилог'],
-    [17,'Читаем по-разному'],[18,'Слушание (аудирование)'],[19,'Что мы знаем о тексте'],[20,'Тема текста'],
-    [21,'Главная мысль (идея) текста'],[22,'Абзац'],[23,'Связь предложений в тексте'],
-    [24,'Повествование как функционально-смысловой тип речи'],[25,'Рассказ как разновидность текста'],
-    [26,'Рассказ на основе услышанного'],[27,'Описание как функционально-смысловой тип речи. Описание предмета'],
-    [28,'Рассуждение как функционально-смысловой тип речи'],[29,'Доказательства в рассуждении'],
-    [30,'Функциональные разновидности языка. Разговорная речь. Язык художественной литературы'],
-    [31,'Функциональные стили: научный, официально-деловой, публицистический'],
-    [32,'Фонетика как раздел лингвистики'],[33,'Гласные звуки'],[34,'Согласные звуки'],[35,'Изменение звуков в потоке речи'],
-    [36,'Согласные твёрдые и мягкие'],[37,'Согласные звонкие и глухие'],[38,'Графика'],[39,'Алфавит'],
-    [40,'Обозначение мягкости согласных с помощью мягкого знака'],[41,'Двойная роль букв Е, Ё, Ю, Я'],
-    [42,'Слог. Ударение. Орфоэпия'],[43,'Фонетический анализ слова'],[44,'Интонация, её функции'],
-    [45,'Орфография. Орфограмма'],[46,'Раздельное написание предлогов с другими словами'],[47,'Разделительные Ъ и Ь'],
-    [48,'Слово и его лексическое значение'],[49,'Однозначные и многозначные слова'],[50,'Прямое и переносное значения слов'],
-    [51,'Омонимы'],[52,'Синонимы'],[53,'Антонимы'],[54,'Паронимы'],[55,'Словари'],
-    [56,'Основные способы толкования слов'],[57,'Лексический анализ слова'],
-    [58,'Морфема — минимальная значимая единица языка'],[59,'Изменение и образование слов'],[60,'Окончание'],
-    [61,'Основа слова'],[62,'Корень слова'],[63,'Суффикс'],[64,'Приставка'],[65,'Чередование звуков'],
-    [66,'Беглые гласные'],[67,'Варианты морфем'],[68,'Морфемный анализ слова'],
-    [69,'Правописание корней с безударными проверяемыми и непроверяемыми гласными'],
-    [70,'Правописание корней с проверяемыми и непроверяемыми согласными'],
-    [71,'Правописание корней с непроизносимыми согласными'],[72,'Буквы Ё — О после шипящих в корне'],
-    [73,'Правописание гласных и согласных в приставках'],[74,'Буквы З и С на конце приставок'],
-    [75,'Буквы Ы — И после Ц'],[76,'Буквы Ы — И после приставок']
-  ],
-  mathTopics: [
-    {id:'arithmetic', title:'Вычисления', baseline:84, note:'Сильная сторона. Поддерживаем скорость и точность.'},
-    {id:'equations', title:'Уравнения', baseline:58, note:'Фокус: обратные действия и понимание равенства.'},
-    {id:'longDivision', title:'Деление столбиком', baseline:55, note:'Фокус: пошаговый алгоритм и нули в частном.'},
-    {id:'geometry', title:'Геометрия', baseline:48, note:'Фокус: точка, отрезок, луч, прямая и обозначения.'},
-    {id:'logic', title:'Логика', baseline:68, note:'Развиваем рассуждение, а не только счёт.'}
-  ],
-  questions: {
-    arithmetic: [
-      {q:'84 : 7 = ?', a:'12', hints:['Разбей 84 на 70 и 14.','Сколько семёрок в 70 и в 14?'], explain:'84 : 7 = 12.'},
-      {q:'320 − 87 = ?', a:'233', hints:['Сначала вычти 80, потом 7.','320 − 80 = 240. Теперь 240 − 7.'], explain:'320 − 87 = 233.'},
-      {q:'6 × 14 = ?', a:'84', hints:['14 = 10 + 4.','6×10 + 6×4.'], explain:'6 × 14 = 84.'}
-    ],
-    equations: [
-      {q:'x + 18 = 43. Чему равен x?', a:'25', hints:['Нужно оставить x в одиночку. Что сделали с x?','К x прибавили 18. Сделай обратное действие.'], explain:'x = 43 − 18 = 25.'},
-      {q:'x − 27 = 15. Чему равен x?', a:'42', hints:['Чтобы вернуть x, нужно отменить вычитание 27.','Какое действие обратно вычитанию?'], explain:'x = 15 + 27 = 42.'},
-      {q:'65 − x = 27. Чему равен x?', a:'38', hints:['Здесь неизвестное — вычитаемое.','Вычитаемое = уменьшаемое − разность.'], explain:'x = 65 − 27 = 38.'},
-      {q:'4x = 28. Чему равен x?', a:'7', hints:['4 одинаковых x дают 28.','Раздели 28 на 4.'], explain:'x = 28 : 4 = 7.'}
-    ],
-    longDivision: [
-      {q:'936 : 3 = ?', a:'312', hints:['Начни с 9 сотен: 9 : 3 = 3.','После 9 переходи к 3 десяткам, затем к 6 единицам.'], explain:'936 : 3 = 312.'},
-      {q:'816 : 4 = ?', a:'204', hints:['8 : 4 = 2. Что происходит с десятками 1?','1 десяток меньше 4 — в частном нужен 0, затем берём 16.'], explain:'816 : 4 = 204.'},
-      {q:'505 : 5 = ?', a:'101', hints:['5 : 5 = 1.','В разряде десятков 0 — не забудь 0 в частном.'], explain:'505 : 5 = 101.'}
-    ],
-    geometry: [
-      {q:'У фигуры есть начало A и конец B: A●────●B. Это…', a:'отрезок', aliases:['отрезок','отрезком'], hints:['У неё две границы.','Луч имеет одно начало и продолжается бесконечно, прямая — в обе стороны.'], explain:'Это отрезок AB: у него два конца.'},
-      {q:'A●────────→ продолжается вправо без конца. Это…', a:'луч', aliases:['луч','лучом'], hints:['Есть начало, но нет конца.','Сравни с солнечным лучом: он идёт от источника в одну сторону.'], explain:'Это луч: одно начало и бесконечное продолжение в одну сторону.'},
-      {q:'←────────────→ линия продолжается в обе стороны. Это…', a:'прямая', aliases:['прямая','прямую'], hints:['У неё нет ни начала, ни конца.','Она продолжается бесконечно в обе стороны.'], explain:'Это прямая.'}
-    ],
-    logic: [
-      {q:'Я загадал число. Умножил его на 4 и прибавил 3. Получилось 27. Какое число?', a:'6', hints:['Сначала отмени +3.','27 − 3 = 24. Теперь отмени умножение на 4.'], explain:'(27 − 3) : 4 = 6.'},
-      {q:'Профессор X решил: 47 + 28 = 615. В чём ошибка? Напиши правильный ответ.', a:'75', hints:['Сложи сначала единицы: 7 + 8.','15 — это 5 единиц и 1 десяток.'], explain:'47 + 28 = 75. Профессор забыл перенос десятка.'},
-      {q:'Есть 24 блока. На каждую башню нужно по 6. Сколько полных башен можно построить?', a:'4', hints:['Это задача на деление.','24 : 6.'], explain:'24 : 6 = 4 башни.'}
-    ],
-    ruBasics: [
-      {q:'Выбери существительное: «быстрый», «бежит», «кот», «он».', a:'кот', hints:['Существительное называет предмет.','Кто? Что?'], explain:'«Кот» — имя существительное.'},
-      {q:'В предложении «Кот быстро бежит» какое слово — глагол?', a:'бежит', hints:['Глагол обозначает действие.','Что делает кот?'], explain:'«Бежит» — глагол.'}
-    ],
-    ruSpeech: [
-      {q:'Один человек говорит долго, не перебивая. Это монолог или диалог?', a:'монолог', hints:['Сколько говорящих активно участвуют?','Один говорящий — монолог.'], explain:'Это монолог.'},
-      {q:'Разговор двух людей — это…', a:'диалог', hints:['«Ди-» указывает на двух участников.','Два собеседника обмениваются репликами.'], explain:'Это диалог.'}
-    ],
-    ruText: [
-      {q:'Текст рассказывает, как щенок потерялся и нашёл дорогу домой. Его тема — ?', a:'щенок', aliases:['щенок','приключение щенка','как щенок потерялся','щенок потерялся'], hints:['Тема отвечает: о чём текст?','Кто главный объект рассказа?'], explain:'Тема — история (приключение) щенка.'},
-      {q:'Как называется часть текста, которая начинается с красной строки?', a:'абзац', hints:['Она объединяет несколько предложений одной микротемой.','Начинается с красной строки.'], explain:'Это абзац.'}
-    ],
-    ruStyles: [
-      {q:'«Вода кипит при определённой температуре при нормальном давлении» — ближе к какому стилю: научному или разговорному?', a:'научному', aliases:['научный','научному'], hints:['Фраза сообщает точный факт без эмоций.','Так обычно формулируют сведения в учебнике.'], explain:'Это признак научного стиля.'}
-    ],
-    ruPhonetics: [
-      {q:'Какой согласный в слове «день» — мягкий: [д] или [н’]?', a:'н', aliases:['н','н’','нʼ'], hints:['Посмотри на мягкий знак.','Ь смягчает предыдущий согласный.'], explain:'В слове «день» мягкий согласный [н’].'},
-      {q:'Сколько слогов в слове «машина»?', a:'3', hints:['Сколько гласных — столько и слогов.','В слове гласные а, и, а.'], explain:'Три гласных — три слога: ма-ши-на.'}
-    ],
-    ruOrthography: [
-      {q:'Как правильно: «в школе» или «вшколе»?', a:'в школе', hints:['«В» здесь предлог.','Предлоги с другими словами пишутся раздельно.'], explain:'Правильно: «в школе».'},
-      {q:'Вставь знак: об__явление.', a:'ъ', aliases:['ъ','объявление'], hints:['После приставки на согласную перед я, е, ё, ю часто нужен разделительный знак.','Слово: об…явление.'], explain:'Правильно: объявление — разделительный Ъ.'}
-    ],
-    ruLexicology: [
-      {q:'«Смелый» и «храбрый» — это синонимы или антонимы?', a:'синонимы', hints:['Их значения близки.','Антонимы имеют противоположные значения.'], explain:'Это синонимы.'},
-      {q:'«Высокий» и «низкий» — это…', a:'антонимы', hints:['Значения противоположны.','Противоположные слова называются…'], explain:'Это антонимы.'},
-      {q:'«Лук» (овощ) и «лук» (оружие) — это…', a:'омонимы', hints:['Звучат и пишутся одинаково, но значения разные.','Это не многозначность, а разные слова.'], explain:'Это омонимы.'}
-    ],
-    ruMorphemics: [
-      {q:'В слове «подводный» общий с «вода, водный» корень — ?', a:'вод', aliases:['вод','-вод-'], hints:['Найди общую значимую часть родственных слов.','вода — водный — подводный.'], explain:'Корень: -вод-.'},
-      {q:'В слове «подписать» приставка — ?', a:'под', aliases:['под','под-'], hints:['Приставка стоит перед корнем.','Сравни: писать — подписать.'], explain:'Приставка: под-.'},
-      {q:'Подбери проверочное слово к «л_сной» (про лес). Напиши слово.', a:'лес', aliases:['лес','лесной'], hints:['Нужно, чтобы гласная в корне стала ударной.','Что такое место с деревьями?'], explain:'Проверочное слово: лес.'},
-      {q:'Как правильно: «бе_шумный»: бесшумный или безшумный?', a:'бесшумный', aliases:['бесшумный','с'], hints:['Перед глухим согласным в приставках без-/бес- пишется С.','Ш — глухой согласный.'], explain:'Правильно: бесшумный.'}
-    ]
-  }
+<body><div id="app"></div>
+<script>
+(function(){
+"use strict";
+var APPVER=4;
+var RU=[
+"Богатство и выразительность русского языка","Лингвистика как наука о языке","Звуки и буквы. Правописание гласных и согласных в корнях слов","Буквы И, У, А после шипящих","Части речи","Глагол","Имя существительное","Имя прилагательное","Местоимение","Словосочетание. Предложение","Пунктуация","Язык и общение","Виды речи. Речь устная и письменная","Монолог","Прямая речь","Диалог. Полилог","Читаем по-разному","Слушание (аудирование)","Что мы знаем о тексте","Тема текста","Главная мысль (идея) текста","Абзац","Связь предложений в тексте","Повествование как функционально-смысловой тип речи","Рассказ как разновидность текста","Рассказ на основе услышанного","Описание как функционально-смысловой тип речи. Описание предмета","Рассуждение как функционально-смысловой тип речи","Доказательства в рассуждении","Функциональные разновидности языка. Разговорная речь. Язык художественной литературы","Функциональные стили: научный, официально-деловой, публицистический","Фонетика как раздел лингвистики","Гласные звуки","Согласные звуки","Изменение звуков в потоке речи","Согласные твёрдые и мягкие","Согласные звонкие и глухие","Графика","Алфавит","Обозначение мягкости согласных с помощью мягкого знака","Двойная роль букв Е, Ё, Ю, Я","Слог. Ударение. Орфоэпия","Фонетический анализ слова","Интонация, её функции","Орфография. Орфограмма","Раздельное написание предлогов с другими словами","Разделительные Ъ и Ь","Слово и его лексическое значение","Однозначные и многозначные слова","Прямое и переносное значения слов","Омонимы","Синонимы","Антонимы","Паронимы","Словари","Основные способы толкования слов","Лексический анализ слова","Морфема — минимальная значимая единица языка","Изменение и образование слов","Окончание","Основа слова","Корень слова","Суффикс","Приставка","Чередование звуков","Беглые гласные","Варианты морфем","Морфемный анализ слова","Правописание корней с безударными проверяемыми и непроверяемыми гласными","Правописание корней с проверяемыми и непроверяемыми согласными","Правописание корней с непроизносимыми согласными","Буквы Ё — О после шипящих в корне","Правописание гласных и согласных в приставках","Буквы З и С на конце приставок","Буквы Ы — И после Ц","Буквы Ы — И после приставок"];
+var M=[
+{id:"equations",t:"Уравнения",b:58,n:"Не переносим механически — понимаем обратные действия."},
+{id:"division",t:"Деление столбиком",b:55,n:"Алгоритм по разрядам, включая нули в частном."},
+{id:"geometry",t:"Геометрия",b:48,n:"Отрезок, луч, прямая, длина, построение и обозначения."},
+{id:"logic",t:"Математическое мышление",b:68,n:"Задачи на связи, обратный ход и проверку рассуждения."},
+{id:"arithmetic",t:"Вычисления",b:84,n:"Скорость, точность и удобные способы счёта."}
+];
+var THEORY={
+equations:{title:"Уравнение — это равенство с неизвестным",points:["Главная цель — оставить неизвестное одно.","Используем обратные действия: сложению ↔ вычитание, умножению ↔ деление.","После решения обязательно подставляем найденное число и проверяем равенство."],example:"x + 18 = 43\nЧтобы оставить x один, убираем +18 обратным действием:\nx = 43 − 18 = 25\nПроверка: 25 + 18 = 43 ✓",visual:"x + 18  =  43\n   −18     −18\n──────────────\n   x      =  25"},
+division:{title:"Деление столбиком — это работа по разрядам",points:["Двигаемся слева направо: сотни → десятки → единицы.","На каждом шаге: делим → умножаем → вычитаем → сносим следующую цифру.","Если текущая часть числа меньше делителя, в частном может появиться 0."],example:"816 : 4\n8 : 4 = 2. Пишем 2.\nСносим 1: 1 меньше 4 → в частном пишем 0.\nСносим 6: 16 : 4 = 4.\nОтвет: 204.",visual:"  816 │ 4\n -8   │ 204\n  01\n   0\n  16\n -16\n   0"},
+geometry:{title:"Геометрические объекты отличаются количеством границ",points:["Отрезок имеет два конца.","Луч имеет начало, но не имеет конца в одном направлении.","Прямая не имеет ни начала, ни конца.","Названия читаем по точкам: отрезок AB, луч AB. Для луча порядок букв важен: A — начало."],example:"Если из точки A провести линию через B и продолжить дальше за B, получим луч AB.\nЕсли оставить только часть между A и B — отрезок AB.",visual:"отрезок AB:  A●────●B\nлуч AB:      A●────●B────→\nпрямая AB:   ←────●A────●B────→"},
+logic:{title:"Сильная математика начинается с вопроса «что связано с чем?»",points:["Не спешим считать: сначала переводим условие в связи.","Полезно идти от результата назад — обратным ходом.","После ответа спрашиваем: подходит ли он ко всем условиям?"],example:"Задумали число, умножили на 4 и прибавили 3, получили 27.\nИдём назад: 27 − 3 = 24, затем 24 : 4 = 6.",visual:"?  → ×4 → +3 → 27\n6  ← ÷4 ← −3 ← 27"},
+arithmetic:{title:"Вычислять можно не только правильно, но и удобно",points:["Разбивай числа на удобные части.","Используй свойства сложения и умножения.","Прикидка помогает заметить нелепый ответ."],example:"98 + 47 = (100 + 47) − 2 = 145.\nЭто быстрее и легче проверить, чем считать по цифрам без плана.",visual:"98 + 47\n= 100 + 47 − 2\n= 145"}
 };
-
-  </script>
-  <script>
-(() => {
-  'use strict';
-  const D = window.TUTOR_DATA;
-  if (!D) throw new Error('TUTOR_DATA is missing');
-
-  const APP_VERSION = '1.0.0-web';
-  const STORAGE_KEY = 'kaiTutorStateWebV1';
-  const defaultState = {
-    role: 'child',
-    screen: 'home',
-    subject: 'math',
-    currentRuParagraph: 3,
-    profile: {name:'Кай', age:11, grade:5, sessionMinutes:40, sessionsPerWeek:3},
-    progress: {},
-    sessions: [],
-    currentLesson: null,
-    tutorMessages: [
-      {from:'tutor', text:'Привет, Кай. Напиши, что непонятно. Я не дам готовый ответ сразу — сначала разберёмся вместе.'}
-    ]
-  };
-
-  let state = loadState();
-
-  function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
-  function loadState(){
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-      return Object.assign(clone(defaultState), saved, {
-        profile: Object.assign({}, defaultState.profile, saved.profile || {}),
-        progress: saved.progress || {},
-        sessions: saved.sessions || [],
-        tutorMessages: saved.tutorMessages || clone(defaultState.tutorMessages)
-      });
-    } catch (e) {
-      return clone(defaultState);
-    }
-  }
-  function saveState(){
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
-  }
-  function esc(s){ return String(s ?? '').replace(/[&<>\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c])); }
-  function norm(s){ return String(s || '').trim().toLowerCase().replace(/ё/g,'е').replace(/[.,!?;:"'()]/g,'').replace(/\s+/g,' '); }
-  function isCorrect(q, answer){
-    const a = norm(answer);
-    return [q.a, ...(q.aliases || [])].map(norm).includes(a);
-  }
-  function shuffle(arr){
-    const a=[...arr];
-    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
-    return a;
-  }
-  function pick(arr,n){
-    if(!arr.length) return [];
-    const out=[];
-    for(let i=0;i<n;i++) out.push(clone(arr[i % arr.length]));
-    return out;
-  }
-
-  function topicKey(subject,id){ return `${subject}:${id}`; }
-  function baselineForMath(id){ return D.mathTopics.find(t => t.id===id)?.baseline || 55; }
-  function getProgress(subject,id,baseline){
-    const key=topicKey(subject,id);
-    if(!state.progress[key]) state.progress[key]={attempts:0,correct:0,hints:0,mastery:baseline ?? 55,last:null,errors:[]};
-    return state.progress[key];
-  }
-  function mastery(subject,id){ return getProgress(subject,id,subject==='math'?baselineForMath(id):55).mastery; }
-  function updateProgress(subject,id,ok,hints,errorLabel){
-    const p=getProgress(subject,id,subject==='math'?baselineForMath(id):55);
-    p.attempts += 1;
-    if(ok) p.correct += 1;
-    p.hints += hints;
-    p.last = new Date().toISOString();
-    const independence=Math.max(0,1-hints*0.28);
-    p.mastery=Math.max(15,Math.min(98,Math.round(p.mastery + (ok ? 7*independence : -8))));
-    if(!ok && errorLabel){ p.errors.unshift({label:errorLabel,date:p.last}); p.errors=p.errors.slice(0,8); }
-    saveState();
-  }
-  function weakMath(){ return D.mathTopics.slice().sort((a,b)=>mastery('math',a.id)-mastery('math',b.id))[0].id; }
-  function ruDomain(n){ if(n<=11)return'ruBasics';if(n<=18)return'ruSpeech';if(n<=29)return'ruText';if(n<=31)return'ruStyles';if(n<=44)return'ruPhonetics';if(n<=47)return'ruOrthography';if(n<=57)return'ruLexicology';return'ruMorphemics'; }
-  function ruSection(n){ if(n<=11)return'Вспоминаем, повторяем, изучаем';if(n<=18)return'Язык и речь';if(n<=29)return'Текст';if(n<=31)return'Функциональные разновидности языка';if(n<=44)return'Фонетика. Графика. Орфоэпия';if(n<=47)return'Орфография';if(n<=57)return'Лексикология';return'Морфемика. Орфография'; }
-  function russianTitle(n){ return D.russianCurriculum[n-1]?.[1] || 'Русский язык'; }
-
-  function buildLesson(subject,mode='lesson'){
-    if(subject==='math'){
-      if(mode==='control'){
-        const pool=[];
-        D.mathTopics.forEach(t => (D.questions[t.id] || []).forEach(q => pool.push({...q,topic:t.id})));
-        return shuffle(pool).slice(0,10);
-      }
-      const topic=weakMath();
-      return pick(shuffle(D.questions[topic] || []),6).map(q=>({...q,topic}));
-    }
-    const n=state.currentRuParagraph;
-    const domain=ruDomain(n);
-    if(mode==='control'){
-      const domains=['ruBasics','ruSpeech','ruText','ruStyles','ruPhonetics','ruOrthography','ruLexicology','ruMorphemics'];
-      const pool=[];
-      domains.forEach(d => (D.questions[d] || []).forEach(q => pool.push({...q,topic:d})));
-      return shuffle(pool).slice(0,10);
-    }
-    return pick(shuffle(D.questions[domain] || []),6).map(q=>({...q,topic:domain}));
-  }
-
-  function startLesson(subject,mode='lesson'){
-    const qs=buildLesson(subject,mode);
-    state.subject=subject;
-    state.currentLesson={subject,mode,qs,index:0,hintIndex:0,answers:[],started:Date.now(),feedback:null};
-    state.screen='lesson';
-    saveState(); render();
-  }
-  function finishLesson(){
-    const L=state.currentLesson;
-    const correct=L.answers.filter(x=>x.ok).length;
-    const hints=L.answers.reduce((s,x)=>s+x.hints,0);
-    const minutes=Math.max(1,Math.round((Date.now()-L.started)/60000));
-    state.sessions.unshift({
-      date:new Date().toISOString(), subject:L.subject, mode:L.mode,
-      correct,total:L.qs.length,hints,minutes,
-      paragraph:L.subject==='ru'?state.currentRuParagraph:null
-    });
-    state.sessions=state.sessions.slice(0,60);
-    state.screen='summary';
-    saveState(); render();
-  }
-
-  function shell(content){
-    return `<div class="shell">
-      <header class="topbar">
-        <button class="brand brand-button" data-action="home" aria-label="На главную">Мой <span>ИИ-репетитор</span></button>
-        <div class="role-switch" aria-label="Режим интерфейса">
-          <button class="${state.role==='child'?'active':''}" data-role="child">Кай</button>
-          <button class="${state.role==='parent'?'active':''}" data-role="parent">Родитель</button>
-        </div>
-      </header>
-      ${content}
-      <footer class="site-footer">Версия ${APP_VERSION} · прогресс хранится на этом устройстве</footer>
-    </div>`;
-  }
-  function topicCard(title,pct,note){
-    return `<div class="topic"><div class="topic-head"><div><h3>${esc(title)}</h3><div class="tiny">${esc(note)}</div></div><b>${pct}%</b></div><div class="bar"><span style="width:${pct}%"></span></div></div>`;
-  }
-
-  function childHome(){
-    const weak=weakMath();
-    const weakTopic=D.mathTopics.find(t=>t.id===weak);
-    const currentRuMastery=mastery('ru',ruDomain(state.currentRuParagraph));
-    return shell(`
-      <section class="hero">
-        <div class="card hero-main">
-          <span class="pill">5 класс · персональный маршрут</span>
-          <h1>Привет, ${esc(state.profile.name)}.</h1>
-          <p class="sub">Сегодня — короткие шаги, схемы и задачи. Никаких длинных лекций: сначала думаем, потом формулируем правило.</p>
-          <div class="btnrow">
-            <button class="primary big" data-action="start-math">Начать занятие</button>
-            <button class="secondary" data-action="start-ru">Русский по учебнику</button>
-          </div>
-        </div>
-        <div class="card focus-card">
-          <div class="eyebrow">Фокус сегодня</div>
-          <div class="focus-title">${esc(weakTopic.title)}</div>
-          <p class="sub">${esc(weakTopic.note)}</p>
-          <div class="chiprow"><span class="tag">~40 минут</span><span class="tag">короткие шаги</span></div>
-        </div>
-      </section>
-
-      <section class="navcards">
-        <button class="navcard" data-action="weak"><span class="navicon">↺</span><b>Повторить слабое</b><small>Задания на те места, где раньше были ошибки.</small></button>
-        <button class="navcard" data-action="choose-control"><span class="navicon">✓</span><b>Контрольная</b><small>Без подсказок. Разбор после окончания.</small></button>
-        <button class="navcard" data-action="homework"><span class="navicon">▣</span><b>Разобрать домашку</b><small>Фото задания и похожие тренировочные примеры.</small></button>
-        <button class="navcard" data-action="tutor"><span class="navicon">?</span><b>Спросить репетитора</b><small>Короткое объяснение без готового ответа.</small></button>
-        <button class="navcard" data-action="progress"><span class="navicon">↗</span><b>Мой прогресс</b><small>Темы, уровни и самостоятельность.</small></button>
-      </section>
-
-      <section class="grid2">
-        <div class="card stack"><div class="section-title">Математика</div>${D.mathTopics.map(t=>topicCard(t.title,mastery('math',t.id),t.note)).join('')}</div>
-        <div class="card">
-          <div class="section-title">Русский язык</div>
-          <div class="topic current-topic"><div class="topic-head"><div><h3>Сейчас в школе</h3><div class="tiny">§ ${state.currentRuParagraph}. ${esc(russianTitle(state.currentRuParagraph))}</div></div><b>${currentRuMastery}%</b></div><div class="bar"><span style="width:${currentRuMastery}%"></span></div></div>
-          <div class="mission"><b>Как работает репетитор</b><p class="sub compact">Ошибка → вопрос → подсказка → ещё одна подсказка → разбор. Готовый ответ не появляется после первой ошибки.</p></div>
-        </div>
-      </section>`);
-  }
-
-  function lessonView(){
-    const L=state.currentLesson;
-    if(!L || !L.qs.length) return shell(`<div class="card">Для этой темы пока нет тестовых заданий. <button class="secondary" data-action="home">На главную</button></div>`);
-    const q=L.qs[L.index];
-    const noHints=L.mode==='control';
-    const title=L.subject==='math' ? (D.mathTopics.find(t=>t.id===q.topic)?.title || 'Математика') : `§ ${state.currentRuParagraph}. ${russianTitle(state.currentRuParagraph)}`;
-    return shell(`
-      <main class="lesson-wrap">
-        <div class="screen-title"><button class="back" data-action="home">←</button><div><div class="eyebrow">${L.subject==='math'?'Математика':'Русский язык'} · ${L.mode==='control'?'контрольная':'занятие'}</div><h2>${esc(title)}</h2></div></div>
-        <div class="lesson-progress">${L.qs.map((_,i)=>`<span class="${i<L.index?'done':i===L.index?'current':''}"></span>`).join('')}</div>
-        <section class="card lesson-card">
-          <span class="pill">Задание ${L.index+1} из ${L.qs.length}</span>
-          <div class="question">${esc(q.q)}</div>
-          <label class="answer-label" for="answer">Твой ответ</label>
-          <input id="answer" class="answer" autocomplete="off" autocapitalize="sentences" />
-          ${L.feedback?`<div class="feedback ${L.feedback.ok?'ok':'bad'}">${esc(L.feedback.text)}</div>`:''}
-          ${L.hintIndex>0 && !noHints?`<div class="hintbox"><b>Подсказка ${L.hintIndex}</b><div>${esc(q.hints[Math.min(L.hintIndex-1,q.hints.length-1)])}</div></div>`:''}
-          <div class="btnrow"><button class="primary" data-action="check">Проверить</button>${!noHints?`<button class="secondary" data-action="hint">Подсказка</button>`:''}<button class="ghost" data-action="skip">Пропустить</button></div>
-        </section>
-        <div class="footer-note">Подсказки учитываются отдельно: правильный ответ с подсказкой и полностью самостоятельное решение — не одно и то же.</div>
-      </main>`);
-  }
-
-  function summaryView(){
-    const s=state.sessions[0];
-    const pct=Math.round(100*s.correct/s.total);
-    const independent=Math.max(0,100-Math.min(100,Math.round((s.hints/Math.max(1,s.total))*28)));
-    const message=pct>=80?'Материал в целом понятен. Следующее занятие можно немного усложнить.':pct>=60?'Основа есть, но часть навыков надо закрепить.':'Лучше вернуться на шаг назад и объяснить тему другим способом.';
-    return shell(`<main class="lesson-wrap"><section class="card result-card"><span class="pill">Занятие завершено</span><h1>${s.correct} из ${s.total}</h1><p class="sub">${message}</p><div class="kpi-grid"><div class="kpi"><div class="metric">${pct}%</div><div class="metric-label">точность</div></div><div class="kpi"><div class="metric">${s.hints}</div><div class="metric-label">подсказок</div></div><div class="kpi"><div class="metric">${independent}%</div><div class="metric-label">самостоятельность</div></div><div class="kpi"><div class="metric">${s.minutes}</div><div class="metric-label">минут</div></div></div><div class="btnrow"><button class="primary" data-action="home">На главную</button><button class="secondary" data-action="weak">Повторить слабое</button></div></section></main>`);
-  }
-
-  function progressView(){
-    return shell(`<div class="screen-title"><button class="back" data-action="home">←</button><h2>Мой прогресс</h2></div><div class="grid2"><section class="card stack"><div class="section-title">Математика</div>${D.mathTopics.map(t=>topicCard(t.title,mastery('math',t.id),t.note)).join('')}</section><section class="card stack"><div class="section-title">Русский язык</div>${['ruBasics','ruSpeech','ruText','ruStyles','ruPhonetics','ruOrthography','ruLexicology','ruMorphemics'].map((d,i)=>topicCard(['Повторение','Язык и речь','Текст','Стили','Фонетика','Орфография','Лексикология','Морфемика'][i],mastery('ru',d),'По части 1 школьного учебника')).join('')}</section></div>`);
-  }
-
-  function homeworkView(){
-    return shell(`<div class="screen-title"><button class="back" data-action="home">←</button><h2>Разобрать домашку</h2></div><div class="grid2"><section class="card"><div class="section-title">Русский язык</div><label class="field-label" for="ru-paragraph">Текущий параграф</label><select id="ru-paragraph" class="select">${D.russianCurriculum.map(([n,t])=>`<option value="${n}" ${n===state.currentRuParagraph?'selected':''}>§ ${n}. ${esc(t)}</option>`).join('')}</select><div class="recommend"><b>${esc(ruSection(state.currentRuParagraph))}</b><br><span class="tiny">Репетитор даст несколько похожих примеров и только потом вернётся к домашнему заданию.</span></div><div class="btnrow"><button class="primary" data-action="start-ru">Потренироваться по §</button></div></section><section class="card"><div class="section-title">Фото задания</div><label class="upload" for="hwfile"><span class="upload-icon">＋</span><b>Выбрать или сфотографировать</b><span class="tiny">В этой версии фото можно прикрепить и посмотреть. Автоматическое распознавание подключается вместе с серверным ИИ.</span></label><input id="hwfile" class="hidden-file" type="file" accept="image/*" capture="environment"/><div id="preview" class="preview"></div></section></div>`);
-  }
-
-  function controlChooser(){
-    return shell(`<main class="lesson-wrap"><div class="screen-title"><button class="back" data-action="home">←</button><h2>Контрольная</h2></div><section class="card"><p class="sub">10 заданий, подсказки отключены. Ошибки разбираются только после окончания.</p><div class="choice-grid"><button class="choice" data-action="control-math"><b>Математика</b><span>Уравнения, деление, геометрия, логика</span></button><button class="choice" data-action="control-ru"><b>Русский язык</b><span>Темы по части 1 учебника</span></button></div></section></main>`);
-  }
-
-  function tutorView(){
-    const msgs=state.tutorMessages.slice(-16).map(m=>`<div class="bubble ${m.from==='user'?'user':'tutor'}">${esc(m.text)}</div>`).join('');
-    return shell(`<main class="lesson-wrap"><div class="screen-title"><button class="back" data-action="home">←</button><div><div class="eyebrow">Демо-помощник</div><h2>Спросить репетитора</h2></div></div><section class="card chat-card"><div class="chat" id="chat">${msgs}</div><div class="chat-compose"><input id="tutor-input" class="answer" placeholder="Например: не понимаю, почему в уравнении надо вычитать 18"/><button class="primary" data-action="send-tutor">Отправить</button></div><div class="footer-note">Сейчас это локальный демонстрационный помощник. Настоящий ИИ-диалог будет подключён на сервере, чтобы не хранить секретный API-ключ в браузере.</div></section></main>`);
-  }
-
-  function parentHome(){
-    const recent=state.sessions.slice(0,6);
-    const totalMinutes=state.sessions.reduce((s,x)=>s+x.minutes,0);
-    const recentHints=recent.reduce((s,x)=>s+x.hints,0);
-    const recentTasks=recent.reduce((s,x)=>s+x.total,0);
-    const weak=weakMath();
-    const weakTopic=D.mathTopics.find(t=>t.id===weak);
-    const recentRows=recent.length?recent.map(s=>`<tr><td>${new Date(s.date).toLocaleDateString('ru-RU')}</td><td>${s.subject==='math'?'Математика':'Русский'}</td><td>${s.correct}/${s.total}</td><td>${s.hints}</td></tr>`).join(''):`<tr><td colspan="4" class="tiny">Пока нет завершённых занятий.</td></tr>`;
-    return shell(`
-      <section class="hero parent-hero"><div class="card"><span class="pill">Родительский кабинет</span><h1>Видно не только оценку, но и причину ошибки.</h1><p class="sub">Отдельно отслеживаются самостоятельность, подсказки, слабые навыки и школьный параграф.</p></div><div class="card"><div class="eyebrow">Рекомендация</div><div class="focus-title">${esc(weakTopic.title)}</div><p class="sub">На следующем занятии 7–10 минут на этот навык + русский по текущему параграфу.</p></div></section>
-      <section class="kpi-grid"><div class="kpi"><div class="metric">${state.sessions.length}</div><div class="metric-label">занятий</div></div><div class="kpi"><div class="metric">${totalMinutes}</div><div class="metric-label">минут</div></div><div class="kpi"><div class="metric">${recentTasks}</div><div class="metric-label">недавних заданий</div></div><div class="kpi"><div class="metric">${recentHints}</div><div class="metric-label">подсказок</div></div></section>
-      <section class="grid2 section-gap"><div class="card stack"><div class="section-title">Математика</div>${D.mathTopics.map(t=>topicCard(t.title,mastery('math',t.id),t.note)).join('')}</div><div class="card"><div class="section-title">Русский · школьная программа</div><label class="field-label" for="parent-ru">Текущий параграф</label><select id="parent-ru" class="select">${D.russianCurriculum.map(([n,t])=>`<option value="${n}" ${n===state.currentRuParagraph?'selected':''}>§ ${n}. ${esc(t)}</option>`).join('')}</select><div class="recommend"><b>Сейчас:</b> § ${state.currentRuParagraph}. ${esc(russianTitle(state.currentRuParagraph))}<br><span class="tiny">Раздел: ${esc(ruSection(state.currentRuParagraph))}</span></div></div></section>
-      <section class="card section-gap"><div class="section-title">Последние занятия</div><div class="table-wrap"><table class="table"><thead><tr><th>Дата</th><th>Предмет</th><th>Результат</th><th>Подсказки</th></tr></thead><tbody>${recentRows}</tbody></table></div></section>
-      <section class="card section-gap"><div class="section-title">Русский язык · часть 1</div><div class="curriculum">${D.russianCurriculum.map(([n,t])=>{const m=mastery('ru',ruDomain(n)); return `<div class="curriculum-row ${n===state.currentRuParagraph?'current':''}"><div><span class="statusdot ${m>=75?'good':m>=55?'mid':''}"></span>§ ${n}</div><div>${esc(t)}</div><div>${m}%</div></div>`}).join('')}</div></section>
-      <section class="card section-gap"><div class="section-title">Данные</div><div class="btnrow"><button class="secondary" data-action="export">Экспорт прогресса</button><button class="ghost danger-text" data-action="reset">Сбросить данные</button></div></section>`);
-  }
-
-  function tutorReply(text){
-    const n=norm(text);
-    if(/уравнен|x|икс/.test(n)) return 'Покажи само уравнение. Сначала определим, какое действие сделали с неизвестным. Потом подберём обратное действие — без «переноса через равно».';
-    if(/делен|столб/.test(n)) return 'Разберём по одному разряду. Напиши пример. Я буду задавать по одному вопросу: сколько раз делитель помещается в первой части делимого, что записываем в частное и что сносим дальше.';
-    if(/луч|отрез|прям/.test(n)) return 'Смотри на количество границ: у отрезка два конца, у луча одно начало, у прямой нет ни начала, ни конца. Напиши, что именно путается — название или построение?';
-    if(/корен|пристав|суффикс|морфем/.test(n)) return 'Возьмём слово и сравним его с родственными словами. Так легче увидеть общую часть и отделить приставку или суффикс. Напиши слово.';
-    if(/правил|русск|параграф|§/.test(n)) return `Сейчас выбран § ${state.currentRuParagraph}: «${russianTitle(state.currentRuParagraph)}». Напиши, что именно в нём непонятно, и я объясню коротко на одном примере.`;
-    return 'Давай разберём по шагам. Напиши конкретный пример или одно предложение из задания. Я сначала задам вопрос, который поможет самому увидеть следующий шаг.';
-  }
-
-  function render(){
-    const app=document.getElementById('app');
-    if(!app) return;
-    let html='';
-    if(state.screen==='lesson') html=lessonView();
-    else if(state.screen==='summary') html=summaryView();
-    else if(state.screen==='progress') html=progressView();
-    else if(state.screen==='homework') html=homeworkView();
-    else if(state.screen==='control') html=controlChooser();
-    else if(state.screen==='tutor') html=tutorView();
-    else html=state.role==='parent'?parentHome():childHome();
-    app.innerHTML=html;
-    bind();
-  }
-
-  function bind(){
-    document.querySelectorAll('[data-role]').forEach(el=>el.addEventListener('click',()=>{state.role=el.dataset.role;state.screen='home';state.currentLesson=null;saveState();render();}));
-    document.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',()=>act(el.dataset.action)));
-    const ru=document.getElementById('ru-paragraph');
-    if(ru) ru.addEventListener('change',()=>{state.currentRuParagraph=Number(ru.value);saveState();render();});
-    const pru=document.getElementById('parent-ru');
-    if(pru) pru.addEventListener('change',()=>{state.currentRuParagraph=Number(pru.value);saveState();render();});
-    const file=document.getElementById('hwfile');
-    if(file) file.addEventListener('change',e=>{
-      const f=e.target.files?.[0]; if(!f) return;
-      const url=URL.createObjectURL(f);
-      const preview=document.getElementById('preview');
-      if(preview) preview.innerHTML=`<img src="${url}" alt="Фото домашнего задания" class="preview-image">`;
-    });
-    const ans=document.getElementById('answer');
-    if(ans) ans.addEventListener('keydown',e=>{if(e.key==='Enter')act('check');});
-    const tutorInput=document.getElementById('tutor-input');
-    if(tutorInput) tutorInput.addEventListener('keydown',e=>{if(e.key==='Enter')act('send-tutor');});
-    const chat=document.getElementById('chat');
-    if(chat) chat.scrollTop=chat.scrollHeight;
-  }
-
-  function act(action){
-    if(action==='home'){state.screen='home';state.currentLesson=null;saveState();return render();}
-    if(action==='start-math') return startLesson('math','lesson');
-    if(action==='start-ru') return startLesson('ru','lesson');
-    if(action==='weak') return startLesson('math','weak');
-    if(action==='choose-control'){state.screen='control';saveState();return render();}
-    if(action==='control-math') return startLesson('math','control');
-    if(action==='control-ru') return startLesson('ru','control');
-    if(action==='homework'){state.screen='homework';saveState();return render();}
-    if(action==='progress'){state.screen='progress';saveState();return render();}
-    if(action==='tutor'){state.screen='tutor';saveState();return render();}
-    if(action==='hint'){
-      const L=state.currentLesson, q=L.qs[L.index];
-      L.hintIndex=Math.min(q.hints.length,L.hintIndex+1); L.feedback=null; saveState(); return render();
-    }
-    if(action==='skip') return recordAnswer(false,true,'');
-    if(action==='check'){
-      const input=document.getElementById('answer');
-      const answer=input?.value || '';
-      if(!answer.trim()){ input?.focus(); return; }
-      const L=state.currentLesson, q=L.qs[L.index], ok=isCorrect(q,answer);
-      if(ok){
-        L.feedback={ok:true,text:'Верно. Хорошо. Теперь запомни не ответ, а способ.'}; saveState(); render(); setTimeout(()=>recordAnswer(true,false,answer),550);
-      } else if(L.mode==='control'){
-        L.feedback={ok:false,text:'Ответ сохранён. Разберём после контрольной.'}; saveState(); render(); setTimeout(()=>recordAnswer(false,false,answer),550);
-      } else {
-        L.feedback={ok:false,text:'Пока не сходится. Не спешим: возьми подсказку и попробуй ещё раз.'}; saveState(); render();
-      }
-      return;
-    }
-    if(action==='send-tutor'){
-      const input=document.getElementById('tutor-input');
-      const text=input?.value.trim(); if(!text) return;
-      state.tutorMessages.push({from:'user',text});
-      state.tutorMessages.push({from:'tutor',text:tutorReply(text)});
-      state.tutorMessages=state.tutorMessages.slice(-20); saveState(); render(); return;
-    }
-    if(action==='export'){
-      const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement('a'); a.href=url; a.download='kai-tutor-progress.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); return;
-    }
-    if(action==='reset'){
-      if(confirm('Сбросить весь сохранённый прогресс на этом устройстве?')){ try{localStorage.removeItem(STORAGE_KEY);}catch(e){} state=clone(defaultState); render(); }
-    }
-  }
-
-  function recordAnswer(ok,skipped=false,answer=''){
-    const L=state.currentLesson;
-    if(!L || !L.qs[L.index]) return;
-    const q=L.qs[L.index];
-    updateProgress(L.subject==='math'?'math':'ru',q.topic,ok,L.hintIndex,!ok?`Ошибка: ${q.q}`:null);
-    L.answers.push({ok,hints:L.hintIndex,answer,skipped});
-    L.index += 1; L.hintIndex=0; L.feedback=null;
-    if(L.index>=L.qs.length) return finishLesson();
-    saveState(); render();
-  }
-
-  render();
+var RU_SPECIAL={
+3:{k:"Орфограммы в корне",theory:["Сначала находим корень слова.","Гласную проверяем словом, где она под ударением; согласную — словом, где после неё слышится гласная.","Проверочное слово должно быть однокоренным или формой того же слова."],ex:"л…сной → лес; ду… → дубы."},
+4:{k:"И, У, А после шипящих",theory:["ЖИ–ШИ пишем с И.","ЧА–ЩА пишем с А.","ЧУ–ЩУ пишем с У."],ex:"жизнь, машина, чаща, чудо, щука."},
+5:{k:"Части речи",theory:["Часть речи определяем по значению, вопросу и грамматическим признакам.","Существительное называет предмет, прилагательное — признак, глагол — действие.","Важно уметь узнавать часть речи в предложении, а не только вспоминать определение."],ex:"Серый кот быстро бежит: кот — существительное, серый — прилагательное, бежит — глагол."},
+6:{k:"Глагол",theory:["Глагол обозначает действие или состояние.","Отвечает на вопросы что делать? что сделать? что делает? что сделал?", "Начальная форма — неопределённая форма на -ть, -ти, -чь."],ex:"читать → читает → читал."},
+7:{k:"Имя существительное",theory:["Существительное называет предмет в широком смысле.","Отвечает на вопросы кто? что?", "Имеет род, число и падеж."],ex:"кот, книга, Сахалин, радость."},
+8:{k:"Имя прилагательное",theory:["Прилагательное обозначает признак предмета.","Связано с существительным и отвечает на какой? какая? какое? какие?", "Изменяется вместе с существительным."],ex:"синий лёд, синяя куртка, синее небо."},
+9:{k:"Местоимение",theory:["Местоимение указывает на предмет или признак, но не называет его.","Личные местоимения: я, ты, он, она, оно, мы, вы, они.","В тексте местоимения помогают не повторять одно и то же слово."],ex:"Кай вышел на лёд. Он начал разминку."},
+10:{k:"Словосочетание. Предложение",theory:["В словосочетании есть главное и зависимое слово: от главного задаём вопрос.","Грамматическая основа предложения не является словосочетанием.","Предложение выражает законченную мысль и имеет интонацию завершённости."],ex:"быстро едет — словосочетание; машина едет — грамматическая основа."},
+11:{k:"Пунктуация",theory:["Знаки препинания показывают смысловое строение предложения.","Сначала определяем структуру предложения, потом ставим знак.","Запятую нельзя ставить только потому, что при чтении хочется сделать паузу."],ex:"Кай открыл дверь, вошёл в комнату и включил свет."},
+45:{k:"Орфограмма",theory:["Орфограмма — место, где написание нужно выбрать по правилу.","Сначала находим опасное место, затем называем правило.","Только потом применяем проверку или алгоритм."],ex:"л…сной → безударная гласная в корне → лес → лесной."},
+46:{k:"Предлог и приставка",theory:["Предлог — отдельное слово, приставка — часть слова.","Между предлогом и словом часто можно вставить другое слово.","Приставка пишется слитно с корнем."],ex:"в школе → в нашей школе; приехал → при- часть слова."},
+47:{k:"Разделительные Ъ и Ь",theory:["Разделительные Ъ и Ь показывают раздельное произношение согласного и Е, Ё, Ю, Я.","Ъ обычно пишется после приставки на согласный.","Ь пишется внутри слова в других позициях по правилу."],ex:"подъезд, объявление; семья, вьюга."},
+58:{k:"Морфема",theory:["Морфема — минимальная значимая часть слова.","Основные морфемы: корень, приставка, суффикс, окончание.","Чтобы не путаться, сначала ищем окончание и основу, потом корень и остальные части."],ex:"под-вод-н-ый: под- — приставка, -вод- — корень, -н- — суффикс, -ый — окончание."},
+60:{k:"Окончание",theory:["Окончание — изменяемая часть слова, которая связывает слова в предложении.","Чтобы найти окончание, измени форму слова.","Часть, которая меняется, и есть окончание."],ex:"книга — книги — книге: меняется -а/-и/-е."},
+61:{k:"Основа слова",theory:["Основа — часть слова без окончания.","Именно в основе заключено основное лексическое значение слова.","Сначала выделяем окончание, затем всё остальное — основа."],ex:"лесной: окончание -ой, основа лесн-."},
+62:{k:"Корень",theory:["Корень — общая значимая часть родственных слов.","Однокоренные слова должны быть близки по смыслу.","Формы одного слова не считаются разными однокоренными словами."],ex:"лес, лесной, лесник — один корень -лес-."},
+63:{k:"Суффикс",theory:["Суффикс стоит после корня и помогает образовывать новые слова.","Сравни родственные слова: часть, добавленная после корня, часто будет суффиксом."],ex:"лес → лесник: -ник- — суффикс."},
+64:{k:"Приставка",theory:["Приставка стоит перед корнем и образует новые слова.","Не путай приставку с предлогом: приставка — часть слова, предлог — отдельное слово."],ex:"ехать → приехать → уехать → переехать."},
+68:{k:"Морфемный анализ",theory:["Разбор выполняем в порядке: окончание → основа → корень → приставка → суффикс.","Каждую морфему нужно доказать изменением формы или подбором родственных слов."],ex:"подводный: под- / -вод- / -н- / -ый."},
+69:{k:"Безударные гласные в корне",theory:["Если гласная в корне без ударения, сначала найди корень.","Подбери однокоренное слово или форму слова так, чтобы сомнительная гласная стала ударной.","Если проверить нельзя, слово нужно сверять со словарём и запоминать."],ex:"л…сной → лес → лесной. Проверочное слово делает Е ударной."},
+70:{k:"Согласные в корне",theory:["Сомнительную согласную проверяем словом, где после неё стоит гласная или сонорный звук.","Важно сначала убедиться, что слова однокоренные."],ex:"дуб → дубы, мороз → морозы."},
+71:{k:"Непроизносимые согласные",theory:["В некоторых сочетаниях один согласный плохо слышен, но пишется.","Нужно подобрать проверочное слово, где этот согласный произносится отчётливо."],ex:"сердце → сердечный; солнце → солнечный."},
+72:{k:"Ё — О после шипящих в корне",theory:["В корне после ж, ш, ч, щ выбор ё/о часто проверяется формой или родственным словом.","Если есть чередование с Е, обычно пишем Ё."],ex:"шёпот — шепчет; жёлтый — желтеть."},
+73:{k:"Гласные и согласные в приставках",theory:["Большинство приставок пишется одинаково независимо от произношения.","Сначала отдели приставку от корня и проверь, действительно ли это приставка."],ex:"подписать, надписать, отнести."},
+74:{k:"З и С на конце приставок",theory:["Перед звонким согласным пишем З, перед глухим — С.","Смотрим на первый звук корня, а не на букву самой приставки."],ex:"безвкусный (в — звонкий), бесшумный (ш — глухой)."},
+75:{k:"Ы — И после Ц",theory:["После Ц выбор Ы/И зависит от части слова и конкретного правила.","В корне чаще И: цирк, цифра; в окончаниях и суффиксах часто Ы: улицы, сестрицын."],ex:"цирк, цифра, но огурцы, сестрицын."},
+76:{k:"Ы — И после приставок",theory:["После русской приставки на согласный начальное И корня часто меняется на Ы.","После меж- и сверх- И сохраняется."],ex:"играть → сыграть; искать → разыскать; интересный → сверхинтересный."}
+};
+var Q={
+ruMorph:[
+["Разбери слово «подводный»: какая приставка?","под",["Сначала найди корень -вод-.","Часть перед корнем — приставка."]],
+["В слове «лесник» какой суффикс?","ник",["Корень -лес-.","Что стоит после корня и образует новое слово?"]],
+["Найди окончание в форме «книгой». Напиши только окончание.","ой",["Измени форму: книга, книги, книгой.","Меняющаяся часть — окончание."]]
+],
+ruOrtho:[
+["Вставь букву: л_сной (проверочное слово «лес»).","е",["Сделай гласную ударной.","В слове «лес» ясно слышно Е."]],
+["Как правильно: бесшумный или безшумный?","бесшумный",["Первый звук корня — Ш.","Ш глухой → перед ним С."]],
+["Вставь букву: сер_це. Проверочное слово «сердечный».","д",["В проверочном слове согласный слышится.","сердечный → сердце."]],
+["Как правильно: жёлтый или жолтый?","жёлтый",["Есть форма «желтеть».","Если появляется Е, в ударном положении пишем Ё."]],
+["Как правильно: сыграть или сиграть?","сыграть",["Есть приставка с- перед корнем играть.","После русской приставки на согласный И меняется на Ы."]]
+],
+ruLex:[
+["Слова «смелый» и «храбрый» — это…","синонимы",["Значения близки.","Не противоположны."]],
+["Слова «высокий» и «низкий» — это…","антонимы",["Значения противоположны.","Противоположные слова называются…"]],
+["«Лук» овощ и «лук» оружие — это…","омонимы",["Одинаково пишутся и звучат.","Значения разные."]]
+],
+ruPhon:[
+["Сколько слогов в слове «машина»?","3",["Сколько гласных — столько слогов.","а, и, а."]],
+["В слове «день» какой согласный смягчается буквой Ь?","н",["Ь относится к предыдущему согласному.","Перед ь стоит Н."]]
+],
+ruText:[
+["Как называется часть текста, которая начинается с красной строки?","абзац",["Объединяет предложения одной микротемой.","Начинается с красной строки."]],
+["Тема текста отвечает на вопрос «о чём?» или «зачем?». Напиши правильный вариант.","о чём",["Тема — предмет разговора.","Она отвечает: о чём говорится?"]]
+]
+};
+var base={ver:APPVER,role:"child",screen:"home",ru:10,mathTopic:"equations",progress:{},sessions:[],lesson:null};
+var S=load();
+function load(){try{var old=JSON.parse(localStorage.getItem("kaiTutorV3")||"null");if(old&&old.ver===APPVER)return Object.assign({},base,old)}catch(e){}return Object.assign({},base)}
+function save(){try{localStorage.setItem("kaiTutorV3",JSON.stringify(S))}catch(e){}}
+function esc(x){return String(x==null?"":x).replace(/[&<>\"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;"}[c]})}
+function norm(x){return String(x||"").trim().toLowerCase().replace(/ё/g,"е").replace(/[.,!?;:\"'()]/g,"").replace(/\s+/g," ")}
+function pkey(s,t){return s+":"+t} function getP(s,t,b){var k=pkey(s,t);if(!S.progress[k])S.progress[k]={m:b||55,a:0,c:0,h:0};return S.progress[k]} function mast(s,t,b){return getP(s,t,b).m}
+function upd(s,t,ok,h,b){var p=getP(s,t,b);p.a++;if(ok)p.c++;p.h+=h;p.m=Math.max(15,Math.min(98,Math.round(p.m+(ok?7*Math.max(0,1-h*.28):-8))));save()}
+function shell(c){return '<div class="shell"><div class="top"><div class="brand">Мой <span>ИИ-репетитор</span></div><div class="switch"><button data-role="child" class="'+(S.role==="child"?"on":"")+'">Кай</button><button data-role="parent" class="'+(S.role==="parent"?"on":"")+'">Родитель</button></div></div>'+c+'<div class="footer">Учимся: объяснение → пример → пробуем вместе → самостоятельно</div></div>'}
+function topic(x){var m=mast("m",x.id,x.b);return '<div class="topic"><div class="topichead"><div><b>'+esc(x.t)+'</b><div class="tiny">'+esc(x.n)+'</div></div><b>'+m+'%</b></div><div class="bar"><span style="width:'+m+'%"></span></div><div class="btns"><button class="secondary" data-mtopic="'+x.id+'">Учить тему</button></div></div>'}
+function home(){return shell('<div class="hero"><div class="card"><span class="pill">5 класс · персональный маршрут</span><h1>Привет, Кай.</h1><p class="muted">Сегодня не тестируемся вслепую. Сначала разбираем идею на коротком объяснении, потом смотрим пример и только после этого решаем сами.</p><div class="btns"><button class="primary" data-a="mathMenu">Математика</button><button class="secondary" data-a="ruMenu">Русский по учебнику</button></div></div><div class="card"><div class="tiny">Текущий русский</div><h2>§ '+S.ru+'</h2><p class="muted">'+esc(RU[S.ru-1])+'</p><span class="pill warn">можно изменить перед уроком</span></div></div><div class="nav"><button data-a="weak"><b>↺ Повторить слабое</b><small>Но сначала короткое напоминание правила.</small></button><button data-a="control"><b>✓ Контрольная</b><small>Только после изучения темы.</small></button><button data-a="homework"><b>▣ Домашка</b><small>Выбрать § и разобрать правило.</small></button><button data-a="progress"><b>↗ Прогресс</b><small>Темы, ошибки, подсказки.</small></button></div>')}
+function mathMenu(){return shell('<div class="card"><h1>Математика</h1><p class="muted">Выбери, что сегодня учим. Каждая тема начинается с теории и разобранного примера.</p></div><div class="grid2" style="margin-top:14px">'+M.map(topic).join("")+'</div>')}
+function ruMenu(){var opts=RU.map(function(x,i){return '<option value="'+(i+1)+'" '+(S.ru===i+1?"selected":"")+'>§ '+(i+1)+'. '+esc(x)+'</option>'}).join("");return shell('<div class="card"><h1>Русский язык</h1><p class="muted">Выберите тот параграф, который Кай сейчас проходит в школе. Репетитор будет объяснять именно эту тему.</p><select id="ruselect">'+opts+'</select><div class="btns"><button class="primary" data-a="startRuTheory">Учить § '+S.ru+'</button><button class="secondary" data-a="home">На главную</button></div></div><div class="card" style="margin-top:14px"><div class="tiny">Сейчас выбрано</div><h2>§ '+S.ru+'. '+esc(RU[S.ru-1])+'</h2><p class="muted">Сначала правило простыми словами, затем пример, затем упражнения по теме.</p></div>')}
+function ruTheory(n){var sp=RU_SPECIAL[n],title=RU[n-1],pts,ex;if(sp){pts=sp.theory;ex=sp.ex}else if(n>=58){pts=["Сначала определяем строение слова и роль каждой части.","Правило применяем только после того, как нашли нужную морфему.","В спорном месте подбираем проверку или объясняем, почему слово нужно запомнить."];ex="Разбор всегда начинаем не с догадки, а с определения части слова."}else if(n>=48){pts=["Смотрим не только на написание слова, но и на его значение.","Сравниваем слова в контексте: одно и то же слово может иметь несколько значений.","Нужно уметь объяснить значение своими словами и подобрать пример."];ex="Слово понимаем через контекст, а не через заучивание термина."}else if(n>=32){pts=["Различаем звук и букву: звук слышим и произносим, букву пишем и видим.","Смотрим на позицию звука в слове и его признаки.","При разборе идём последовательно, а не угадываем по написанию."];ex="Слово можно написать одинаково, но важно уметь объяснить звуковой состав."}else{pts=["Сначала определяем, что именно изучает этот параграф.","Ищем признак, по которому явление можно узнать в тексте.","После правила обязательно применяем его к новому примеру."];ex="Правило считается понятным, если ты можешь объяснить его своими словами и применить к новому примеру."}return {title:title,points:pts,example:ex}}
+function theoryScreen(){var L=S.lesson,th=L.sub==="m"?THEORY[L.topic]:ruTheory(S.ru),name=L.sub==="m"?(M.find(function(x){return x.id===L.topic})||{}).t:"§ "+S.ru+". "+RU[S.ru-1];return shell('<div class="lesson"><button class="secondary" data-a="home">← На главную</button><div class="card" style="margin-top:12px"><span class="pill">Шаг 1 из 3 · объяснение</span><h1>'+esc(name)+'</h1><div class="theorybox"><h3>'+esc(th.title)+'</h3>'+th.points.map(function(x){return '<div class="step">'+esc(x)+'</div>'}).join("")+'</div>'+(L.sub==="m"?'<div class="diagram">'+esc(th.visual)+'</div>':'')+'<div class="examplebox"><h3>Разобранный пример</h3><div>'+esc(th.example)+'</div></div><div class="btns"><button class="primary" data-a="toGuided">Понял, давай попробуем вместе</button></div></div></div>')}
+function genMath(topic,n){var a,b,x,q,ans,h;if(topic==="equations"){if(n%4===0){x=7+n;a=12+n;q="x + "+a+" = "+(x+a)+". Найди x.";ans=String(x);h=["Что прибавили к x?","Вычти это число из правой части."]}else if(n%4===1){x=11+n;a=9+n;q="x − "+a+" = "+(x-a)+". Найди x.";ans=String(x);h=["Чтобы отменить вычитание, используй сложение.","Прибавь "+a+" к обеим частям."]}else if(n%4===2){x=5+n;a=50+n;q=a+" − x = "+(a-x)+". Найди x.";ans=String(x);h=["Неизвестное здесь — вычитаемое.","Вычитаемое = уменьшаемое − разность."]}else{x=3+n;b=4+n;q=b+"x = "+(b*x)+". Найди x.";ans=String(x);h=["Это "+b+" одинаковых x.","Раздели правую часть на "+b+"."]}}
+else if(topic==="division"){var arr=[[936,3],[816,4],[1005,5],[1248,6],[2709,9],[1407,7],[2408,8],[3213,3]];var z=arr[n%arr.length];q=z[0]+" : "+z[1]+" = ?";ans=String(z[0]/z[1]);h=["Иди слева направо по разрядам.","На каждом шаге: дели → умножай → вычитай → сноси."]}
+else if(topic==="geometry"){var gs=[['У фигуры есть начало A и она проходит через B, продолжаясь дальше за B. Как она называется?','луч AB',['Начало одно.','Порядок букв важен: A — начало.']],['У фигуры есть два конца A и B. Как она называется?','отрезок AB',['Два конца.','Это не луч и не прямая.']],['Линия продолжается бесконечно в обе стороны через A и B. Как она называется?','прямая AB',['Нет начала и конца.','Продолжается в обе стороны.']],['Длина отрезка AB 17 см, точка C лежит между A и B, AC=9 см. Чему равен CB?','8',['AB = AC + CB.','17 − 9.']],['На луче AB точка C находится дальше B. AB=6 см, BC=4 см. Чему равен AC?','10',['Точки идут A-B-C.','AC = AB + BC.']],['Отрезок длиной 24 см разделили на 3 равные части. Чему равна длина одной части?','8',['Три равные части.','24 : 3.']]];var g=gs[n%gs.length];q=g[0];ans=g[1];h=g[2]}
+else if(topic==="logic"){var ls=[['Задумали число. Умножили на 5 и вычли 7. Получили 28. Какое число задумали?','7',['Иди от 28 назад.','28+7, затем раздели на 5.']],['В двух коробках 36 деталей. В первой на 8 больше, чем во второй. Сколько деталей во второй?','14',['Убери разницу 8.','28 раздели пополам.']],['Профессор написал: 398+207=595. Напиши правильную сумму.','605',['398+200=598.','Добавь ещё 7.']],['Число увеличили на 12, затем результат удвоили и получили 50. Какое было число?','13',['Иди назад: 50:2.','Потом вычти 12.']],['Периметр квадрата 36 см. Чему равна сторона?','9',['У квадрата четыре равные стороны.','36:4.']],['54 книги расставили поровну на 3 полки. С одной полки убрали 7 книг. Сколько осталось на этой полке?','11',['Сначала 54:3.','Потом 18−7.']]];var l=ls[n%ls.length];q=l[0];ans=l[1];h=l[2]}
+else{var ar=[[98,47,'+'],[560,275,'-'],[25,16,'*'],[144,12,'/'],[399,201,'+'],[1000,487,'-']];var r=ar[n%ar.length],op=r[2];q=r[0]+" "+op.replace('*','×').replace('/',' : ')+" "+r[1]+" = ?";ans=String(op==='+'?r[0]+r[1]:op==='-'?r[0]-r[1]:op==='*'?r[0]*r[1]:r[0]/r[1]);h=["Попробуй разбить число на удобные части.","Сделай прикидку перед точным ответом."]}return {q:q,a:ans,h:h,t:topic,b:(M.find(function(x){return x.id===topic})||{}).b||55}}
+function ruSpecific(n){
+var b=null;
+if(n===10)b=[
+["Что НЕ является словосочетанием: «высокий дом» или «дом стоит»?","дом стоит",["Найди грамматическую основу.","Подлежащее + сказуемое не образуют словосочетание."]],
+["В словосочетании «читать книгу» главное слово?","читать",["От какого слова задаём вопрос?","читать (что?) книгу."]],
+["В словосочетании «очень быстро» главное слово?","быстро",["быстро (как?) очень.","Главное слово — быстро."]],
+["Что выражает законченную мысль: словосочетание или предложение?","предложение",["Есть интонация завершённости.","Это единица общения."]],
+["В «интересная книга» зависимое слово?","интересная",["книга (какая?) интересная.","Вопрос задаём от главного слова книга."]],
+["Является ли «Кай читает» словосочетанием? Ответь да/нет.","нет",["Это грамматическая основа.","Подлежащее + сказуемое — не словосочетание."]]
+];
+else if(n===11)b=[
+["Нужна ли запятая: «Кай вошёл в комнату и включил свет»? да/нет","нет",["Одиночный союз И соединяет однородные сказуемые.","Запятая не нужна."]],
+["Какой знак ставится в конце вопросительного предложения?","?",["Это вопрос.","Знак вопроса."]],
+["Какой знак обычно разделяет элементы перечисления без союзов?","запятая",["Перечисление.","Нужен знак внутри предложения."]],
+["Какой знак ставится в конце восклицательного предложения?","!",["Сильная эмоция.","Восклицательный знак."]],
+["Нужна ли запятая: «На столе лежали книги тетради карандаши»? да/нет","да",["Есть перечисление однородных членов.","Между ними нужны запятые."]],
+["Какой знак ставится в конце повествовательного невосклицательного предложения?",".",["Обычное сообщение.","Точка."]]
+];
+else if(n===47)b=[
+["Вставь знак: об__явление.","ъ",["После приставки об- перед я.","Нужен разделительный Ъ."]],
+["Вставь знак: сем__я.","ь",["Внутри слова перед я.","Нужен разделительный Ь."]],
+["Как правильно: подъезд или подьезд?","подъезд",["После приставки под- перед е.","Пишем Ъ."]],
+["Как правильно: вьюга или въюга?","вьюга",["Это не позиция после приставки.","Пишем Ь."]],
+["Вставь знак: с__ёмка.","ъ",["Приставка с- перед ё.","Пишем Ъ."]],
+["Вставь знак: солов__и.","ь",["Внутри слова перед иотированным звуком.","Пишем Ь."]]
+];
+else if(n===69)b=[
+["Вставь букву: л_сной. Проверочное «лес».","е",["Сделай гласную ударной.","В «лес» слышно Е."]],
+["Вставь букву: тр_ва. Проверочное «травы».","а",["Под ударением слышно А.","Пишем А."]],
+["Вставь букву: з_ма. Проверочное «зимы».","и",["Под ударением слышно И.","Пишем И."]],
+["Вставь букву: г_ристый. Проверочное «гора».","о",["Слова однокоренные.","В «гора» О под ударением."]],
+["Вставь букву: св_тить. Проверочное «свет».","е",["Сделай гласную ударной.","Свет → светить."]],
+["Вставь букву: х_лодный. Проверочное «холод».","о",["Найди корень.","В слове «холод» слышно О."]]
+];
+else if(n===70)b=[
+["Вставь букву: ду_. Проверочное «дубы».","б",["Перед гласной согласный слышен ясно.","дубы."]],
+["Вставь букву: моро_. Проверочное «морозы».","з",["Поставь после согласной гласную.","морозы."]],
+["Вставь букву: гри_. Проверочное «грибы».","б",["В «грибы» согласный слышен.","Пишем Б."]],
+["Вставь букву: хле_. Проверочное «хлеба».","б",["После Б гласная.","хлеба."]],
+["Вставь букву: бере_. Проверочное «берега».","г",["В «берега» слышно Г.","Пишем Г."]],
+["Вставь букву: морко_ь. Проверочное «моркови».","в",["В «моркови» В слышно.","Пишем В."]]
+];
+else if(n===71)b=[
+["Вставь букву: сер_це.","д",["Проверочное «сердечный».","Д слышится."]],
+["Вставь букву: со_нце.","л",["Проверочное «солнечный».","Л слышится."]],
+["Вставь букву: чес_ный.","т",["Проверочное «честь».","Т сохраняется."]],
+["Вставь букву: мес_ность.","т",["Проверочное «место».","Т слышится."]],
+["Вставь букву: праз_ник.","д",["Проверочное «праздничный».","Д сохраняется."]],
+["Вставь букву: звёз_ный.","д",["Проверочное «звезда».","Д слышится."]]
+];
+else if(n===72)b=[
+["Как правильно: жёлтый или жолтый?","жёлтый",["Проверка: желтеть.","Есть Е → Ё."]],
+["Как правильно: шёпот или шопот?","шёпот",["Проверка: шепчет.","Есть Е → Ё."]],
+["Вставь букву: ч_рный.","ё",["Проверка: чернеть.","Есть Е."]],
+["Вставь букву: ш_лк.","ё",["Проверка: шелковистый.","Есть Е."]],
+["Вставь букву: ж_лудь.","ё",["Проверка: желудёвый/желудь в словарном ряду.","Пишем Ё."]],
+["Как правильно: чёрствый или чорствый?","чёрствый",["Сравни с черстветь.","Пишем Ё."]]
+];
+else if(n===74)b=[
+["Как правильно: бесшумный или безшумный?","бесшумный",["Ш — глухой.","Перед глухим С."]],
+["Как правильно: безвкусный или бесвкусный?","безвкусный",["В — звонкий.","Перед звонким З."]],
+["Как правильно: расписать или разписать?","расписать",["П — глухой.","Перед П С."]],
+["Как правильно: разбить или расбить?","разбить",["Б — звонкий.","Перед Б З."]],
+["Как правильно: бескрайний или безкрайний?","бескрайний",["К — глухой.","Перед К С."]],
+["Как правильно: бездарный или бесдарный?","бездарный",["Д — звонкий.","Перед Д З."]]
+];
+else if(n===76)b=[
+["Как правильно: сыграть или сиграть?","сыграть",["Приставка с- на согласный.","И → Ы."]],
+["Как правильно: разыскать или разискать?","разыскать",["После русской приставки на согласный.","И → Ы."]],
+["Как правильно: сверхинтересный или сверхынтересный?","сверхинтересный",["После сверх- И сохраняется.","Это исключение."]],
+["Как правильно: подытожить или подитожить?","подытожить",["После под- на согласный.","И → Ы."]],
+["Как правильно: безынициативный или безинициативный?","безынициативный",["Русская приставка без-.","И → Ы."]],
+["Как правильно: межинститутский или межынститутский?","межинститутский",["После меж- И сохраняется.","Исключение."]]
+];
+return b;
+}
+function ruBank(n){var sp=ruSpecific(n);if(sp)return sp;if(n<=11)return Q.ruBasics;if(n<=18)return Q.ruSpeech;if(n<=29)return Q.ruText;if(n<=31)return Q.ruStyles;if(n<=44)return Q.ruPhonetics;if(n<=47)return Q.ruOrthography;if(n<=57)return Q.ruLex;return Q.ruMorph}
+function genRu(n,i){var bank=ruBank(n),z=bank[i%bank.length];return {q:z[0],a:z[1],h:z[2],t:"p"+n,b:55}}
+function start(sub,topic,mode){
+var control=mode==="control";
+S.lesson={sub:sub,topic:topic||null,mode:mode||"lesson",phase:control?"practice":"theory",qs:[],i:0,hi:0,ans:[],start:Date.now(),fb:null};
+if(sub==="m"){
+  if(control){var topics=["equations","division","geometry","logic","arithmetic"];for(var i=0;i<10;i++)S.lesson.qs.push(genMath(topics[i%topics.length],i));}
+  else{for(var j=0;j<6;j++)S.lesson.qs.push(genMath(topic,j));}
+}else{
+  var bank=ruBank(S.ru),count=control?Math.min(8,bank.length):Math.min(6,bank.length);
+  for(var k=0;k<count;k++){var z=bank[k];S.lesson.qs.push({q:z[0],a:z[1],h:z[2],t:"p"+S.ru,b:55});}
+}
+S.screen="lesson";save();render()}
+function guided(){var L=S.lesson,th=L.sub==="m"?THEORY[L.topic]:ruTheory(S.ru),q=L.qs[0];return shell('<div class="lesson"><div class="card"><span class="pill">Шаг 2 из 3 · пробуем вместе</span><h2>'+esc(th.title)+'</h2><div class="q">'+esc(q.q)+'</div><p class="muted">Сначала скажи себе: какое правило здесь нужно? Если застрял — открой одну подсказку.</p><input id="ans" class="answer" placeholder="Твой ответ"><div class="btns"><button class="primary" data-a="guidedCheck">Проверить</button><button class="secondary" data-a="hint">Подсказка</button></div>'+renderHints()+(L.fb?'<div class="feedback '+(L.fb.ok?'ok':'bad')+'">'+esc(L.fb.txt)+'</div>':'')+'</div></div>')}
+function renderHints(){var L=S.lesson,q=L.qs[L.i],s="";for(var i=0;i<L.hi;i++)s+='<div class="hint"><b>Подсказка '+(i+1)+'</b><br>'+esc(q.h[i])+'</div>';return s}
+function practice(){var L=S.lesson,q=L.qs[L.i],no=L.mode==="control",bars=L.qs.map(function(_,i){return '<i class="'+(i<L.i?'done':i===L.i?'cur':'')+'"></i>'}).join("");return shell('<div class="lesson"><button class="secondary" data-a="home">← На главную</button><div class="tiny">'+(L.sub==="m"?"Математика":"Русский язык")+(no?" · контрольная":" · самостоятельная практика")+'</div><div class="progress">'+bars+'</div><div class="card"><span class="pill">'+(no?"Контрольная":"Шаг 3 из 3 · самостоятельно")+'</span><div class="q">'+esc(q.q)+'</div><input id="ans" class="answer" autocomplete="off" placeholder="Твой ответ"><div class="btns"><button class="primary" data-a="check">Проверить</button>'+(no?"":'<button class="secondary" data-a="hint">Подсказка</button>')+'<button class="ghost" data-a="skip">Пропустить</button></div>'+(L.fb?'<div class="feedback '+(L.fb.ok?'ok':'bad')+'">'+esc(L.fb.txt)+'</div>':'')+renderHints()+'</div></div>')}
+function lesson(){var L=S.lesson;if(L.phase==="theory")return theoryScreen();if(L.phase==="guided")return guided();return practice()}
+function answer(ok){var L=S.lesson,q=L.qs[L.i];upd(L.sub,q.t,ok,L.hi,q.b);L.ans.push({ok:ok,h:L.hi});L.i++;L.hi=0;L.fb=null;if(L.i>=L.qs.length){var c=L.ans.filter(function(x){return x.ok}).length,h=L.ans.reduce(function(s,x){return s+x.h},0);S.sessions.unshift({d:new Date().toISOString(),s:L.sub,c:c,n:L.qs.length,h:h,topic:L.sub==='m'?L.topic:'§'+S.ru});S.screen="summary"}save();render()}
+function summary(){var x=S.sessions[0]||{c:0,n:0,h:0};return shell('<div class="card"><span class="pill ok">Занятие завершено</span><h1>'+x.c+' из '+x.n+'</h1><p class="muted">Подсказок: '+x.h+'. Следующий урок будет учитывать самостоятельность, а не только число правильных ответов.</p><div class="btns"><button class="primary" data-a="home">На главную</button></div></div>')}
+function parent(){var rows=S.sessions.slice(0,10).map(function(x){return '<tr><td>'+new Date(x.d).toLocaleDateString('ru-RU')+'</td><td>'+(x.s==='m'?'Математика':'Русский')+'</td><td>'+esc(x.topic||'')+'</td><td>'+x.c+'/'+x.n+'</td><td>'+x.h+'</td></tr>'}).join("")||'<tr><td colspan="5" class="tiny">Пока нет занятий.</td></tr>';var opts=RU.map(function(x,i){return '<option value="'+(i+1)+'" '+(S.ru===i+1?'selected':'')+'>§ '+(i+1)+'. '+esc(x)+'</option>'}).join("");return shell('<div class="card"><span class="pill">Родительский кабинет</span><h1>Прогресс Кая</h1><p class="muted">Главное изменение: учебный режим теперь отделён от контрольного. В обычном занятии сначала идёт объяснение.</p></div><div class="grid2" style="margin-top:14px"><div class="card"><h3>Текущий параграф русского</h3><select id="ruselect">'+opts+'</select><p class="muted">§ '+S.ru+'. '+esc(RU[S.ru-1])+'</p><button class="primary" data-a="startRuTheory">Открыть урок по этому §</button></div><div class="card"><h3>Математика</h3>'+M.map(topic).join("")+'</div></div><div class="card" style="margin-top:14px"><h3>Последние занятия</h3><div style="overflow:auto"><table class="table"><thead><tr><th>Дата</th><th>Предмет</th><th>Тема</th><th>Результат</th><th>Подсказки</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>')}
+function control(){return shell('<div class="card"><h2>Контрольная</h2><p class="muted">Контрольную лучше запускать после учебного занятия. Здесь нет теории и подсказок.</p><div class="grid2">'+M.map(function(x){return '<button class="choice" data-control="'+x.id+'"><b>'+esc(x.t)+'</b><br><span class="tiny">10 заданий</span></button>'}).join("")+'<button class="choice" data-a="cr"><b>Русский: § '+S.ru+'</b><br><span class="tiny">8 заданий</span></button></div><button class="ghost" data-a="home">Отмена</button></div>')}
+function homework(){return ruMenu()}
+function render(){var a=document.getElementById('app');if(S.role==='parent'&&S.screen==='home')a.innerHTML=parent();else if(S.screen==='mathMenu')a.innerHTML=mathMenu();else if(S.screen==='ruMenu')a.innerHTML=ruMenu();else if(S.screen==='lesson')a.innerHTML=lesson();else if(S.screen==='summary')a.innerHTML=summary();else if(S.screen==='control')a.innerHTML=control();else if(S.screen==='homework')a.innerHTML=homework();else a.innerHTML=home();bind()}
+function bind(){document.querySelectorAll('[data-role]').forEach(function(b){b.onclick=function(){S.role=b.dataset.role;S.screen='home';S.lesson=null;save();render()}});document.querySelectorAll('[data-a]').forEach(function(b){b.onclick=function(){act(b.dataset.a)}});document.querySelectorAll('[data-mtopic]').forEach(function(b){b.onclick=function(){S.mathTopic=b.dataset.mtopic;start('m',S.mathTopic,'lesson')}});document.querySelectorAll('[data-control]').forEach(function(b){b.onclick=function(){start('m',b.dataset.control,'control')}});var rs=document.getElementById('ruselect');if(rs)rs.onchange=function(){S.ru=Number(rs.value);save();render()};var an=document.getElementById('ans');if(an)an.onkeydown=function(e){if(e.key==='Enter')act(S.lesson&&S.lesson.phase==='guided'?'guidedCheck':'check')}}
+function act(a){if(a==='home'){S.screen='home';S.lesson=null;save();return render()}if(a==='mathMenu'){S.screen='mathMenu';save();return render()}if(a==='ruMenu'){S.screen='ruMenu';save();return render()}if(a==='startRuTheory')return start('r',null,'lesson');if(a==='weak'){var w=M.slice().sort(function(x,y){return mast('m',x.id,x.b)-mast('m',y.id,y.b)})[0];return start('m',w.id,'lesson')}if(a==='control'){S.screen='control';save();return render()}if(a==='cr')return start('r',null,'control');if(a==='homework'){S.screen='ruMenu';save();return render()}if(a==='progress'){S.role='parent';S.screen='home';save();return render()}if(a==='toGuided'){S.lesson.phase='guided';S.lesson.i=0;S.lesson.hi=0;S.lesson.fb=null;save();return render()}if(a==='hint'){var L=S.lesson,q=L.qs[L.i];L.hi=Math.min(q.h.length,L.hi+1);L.fb=null;save();return render()}if(a==='guidedCheck'){var Lg=S.lesson,qg=Lg.qs[0],vg=(document.getElementById('ans')||{}).value||'';if(!vg.trim())return;var okg=norm(vg)===norm(qg.a);if(okg){Lg.fb={ok:true,txt:'Верно. Теперь переходим к самостоятельным заданиям.'};save();render();setTimeout(function(){Lg.phase='practice';Lg.i=1;Lg.hi=0;Lg.fb=null;save();render()},650)}else{Lg.fb={ok:false,txt:'Не страшно. Открой подсказку и попробуй ещё раз — ответ пока не показываем.'};save();render()}return}if(a==='skip')return answer(false);if(a==='check'){var L=S.lesson,q=L.qs[L.i],v=(document.getElementById('ans')||{}).value||'';if(!v.trim())return;var ok=norm(v)===norm(q.a);if(ok){L.fb={ok:true,txt:'Верно. Объясни себе, почему это правило здесь сработало.'};save();render();setTimeout(function(){answer(true)},500)}else if(L.mode==='control'){L.fb={ok:false,txt:'Ответ сохранён. Разбор будет после контрольной.'};save();render();setTimeout(function(){answer(false)},500)}else{L.fb={ok:false,txt:'Пока не сходится. Проверь правило или возьми одну подсказку.'};save();render()}return}}
+render();
 })();
-
-  </script>
-</body>
-</html>
+</script></body></html>
